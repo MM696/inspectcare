@@ -1,0 +1,147 @@
+.signup-layout {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.signup-left, .signup-right {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-left {
+  background: #f8faff;
+  padding: 30px;
+  flex-direction: column;
+}
+
+
+.signup-illustration {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.signup-right {
+  padding: 30px;
+  background: #f9f9fe;
+}
+
+.form-box {
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-box h2 {
+  color: #0074d9;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 10px;
+  color: #444;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.checkbox-container {
+  font-size: 13px;
+  margin-bottom: 14px;
+  display:flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  margin-right: 6px;
+}
+
+.form-box input[type='text'],
+.form-box input[type='email'],
+.form-box input[type='password'] {
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.signup-left button {
+  width: 100%;
+  background: #0074d9;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.signup-left button:hover {
+  background: #2ea0f2;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f9fc;
+}
+
+.login-container .form-box {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.logo {
+  max-width: 100px;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0a58ca;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.forgot-password,
+.signup-redirect {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #0a58ca;
+  text-decoration: none;
+}
