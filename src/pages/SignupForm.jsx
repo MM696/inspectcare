@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { href, useNavigate } from "react-router-dom";
+import flexisafLogo from "../assets/flexisaf-logo.jpg";
 import "./form.css";
 import { Link } from "react-router-dom";
 
@@ -29,7 +30,7 @@ export default function SignUpForm() {
     <div className="signup-layout">
       <div className="signup-left">
         <img
-          src="https://i.ibb.co/ZGJ0g5T/inspectcare-graphic.png" // Replace with your actual image URL or local import
+          src={flexisafLogo} // Replace with your actual image URL or local import
           alt="InspectCare"
           className="signup-illustration"
         />

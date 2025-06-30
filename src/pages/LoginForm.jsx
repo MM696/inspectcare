@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import flexisaflogo from "../assets/flexisaf-logo.jpg";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -20,11 +21,7 @@ function LoginForm() {
   return (
     <div className="login-container">
       <div className="form-box">
-        <img
-          src="https://i.ibb.co/ZGJ0g5T/inspectcare-graphic.png"
-          alt="Logo"
-          className="logo"
-        />
+        <img src={flexisaflogo} alt="Logo" className="logo" />
 
         <form onSubmit={handleSubmit}>
           <input
