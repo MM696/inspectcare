@@ -23,13 +23,38 @@ function Dashboard() {
         >
           Check Symptoms
         </button>
-        <button className="dashboard-button">Med Reminders</button>
-        <button className="dashboard-button">Appointments</button>
+        <button
+          className="dashboard-button"
+          onClick={() => navigate("/MedicationReminder")}
+        >
+          Med Reminders
+        </button>
+        <button
+          className="dashboard-button"
+          onClick={() => navigate("/BookingConfirmation")}
+        >
+          Appointments
+        </button>
       </div>
       <div className="dashboard-grid 2">
-        <button className="dashboard-button">Doctors</button>
-        <button className="dashboard-button">Check Medications</button>
-        <button className="dashboard-button">Ambulance</button>
+        <button
+          className="dashboard-button"
+          onClick={() => navigate("/BookAppointmentpage")}
+        >
+          Doctors
+        </button>
+        <button
+          className="dashboard-button"
+          onClick={() => navigate("/MedicationSummary")}
+        >
+          Check Medications
+        </button>
+        <button
+          className="dashboard-button"
+          onClick={() => navigate("/ambulance")}
+        >
+          Ambulance
+        </button>
       </div>
     </div>
   );

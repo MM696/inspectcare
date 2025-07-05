@@ -241,3 +241,24 @@ button.active {
 .get-result-button:hover {
   background-color: #218838;
 }
+
+.container2 .top-right-button{
+    position: absolute;
+  top: 20px;
+  right: 20px;
+
+} 
+
+.next-button {
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.next-button:hover {
+  background-color: #1e40af;
+}

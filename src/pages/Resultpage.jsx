@@ -6,7 +6,15 @@ const ResultPage = ({ selectedSymptoms, score, severity }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="container2">
+      <div
+        className="top-right-button"
+        style={{ marginTop: "2rem", textAlign: "center" }}
+      >
+        <button className="next-button" onClick={() => navigate("/dashboard")}>
+          Next ➡
+        </button>
+      </div>
       <h1>InspectCare</h1>
 
       <div className="result-header">
