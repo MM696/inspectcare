@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import flexisafLogo from "../assets/flexisaf-logo.jpg";
 import "./form.css";
-import axios from 'axios';
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -43,25 +42,10 @@ export default function SignUpForm() {
         return;
       }
 
-      const userData = {
-           email:email,
-           username: username,
-           password:password,
-           fullname:fullName
-      }
-     fetch('http://localhost:8080/api/user/create',
-       {
-         method: "post",
-         body:JSON.stringify(userData),
-         headers:{
-          'Content-Type':'application/json'
-         }
-        })
-    .then(res =>  res.data);
-     /* localStorage.setItem(
+      localStorage.setItem(
         "user",
         JSON.stringify({ email, password, username, fullName })
-      );*/
+      );
 
       alert("Account created!");
       navigate("/login");

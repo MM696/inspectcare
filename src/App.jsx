@@ -4,12 +4,13 @@ import SignUpForm from "./pages/signupform";
 import LoginForm from "./pages/Loginform";
 import Dashboard from "./pages/dashboard";
 import Symptoms from "./pages/Symptoms";
-import Result from "./pages/Resultpage"; // make sure this is the right path
+import Result from "./pages/Resultpage";
 import MedicationReminder from "./pages/MedicationReminder";
 import MedicationSummary from "./pages/MedicationSummary";
 import BookAppointmentpage from "./pages/BookAppointmentpage";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import AmbulanceBooking from "./pages/AmbulanceBooking";
+import ProtectedRoute from "./components/ProtectedRoute"; // ✅ import
 import "./App.css";
 
 function App() {
@@ -18,54 +19,91 @@ function App() {
   const [severity, setSeverity] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
   const [appointmentTime, setAppointmentTime] = useState("");
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/signup" />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/MedicationReminder" element={<MedicationReminder />} />
-        <Route path="/MedicationSummary" element={<MedicationSummary />} />
-        <Route path="/ambulance" element={<AmbulanceBooking />} />
+
+        {/* 🔒 Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/symptoms"
+          element={
+            <ProtectedRoute>
+              <Symptoms
+                setSelectedSymptoms={setSelectedSymptoms}
+                setScore={setScore}
+                setSeverity={setSeverity}
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/result"
+          element={
+            <ProtectedRoute>
+              <Result
+                selectedSymptoms={selectedSymptoms}
+                score={score}
+                severity={severity}
+              />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/BookAppointmentpage"
           element={
-            <BookAppointmentpage
-              setAppointmentDate={setAppointmentDate}
-              setAppointmentTime={setAppointmentTime}
-            />
+            <ProtectedRoute>
+              <BookAppointmentpage
+                setAppointmentDate={setAppointmentDate}
+                setAppointmentTime={setAppointmentTime}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/BookingConfirmation"
           element={
-            <BookingConfirmation
-              appointmentDate={appointmentDate}
-              appointmentTime={appointmentTime}
-            />
+            <ProtectedRoute>
+              <BookingConfirmation
+                appointmentDate={appointmentDate}
+                appointmentTime={appointmentTime}
+              />
+            </ProtectedRoute>
           }
         />
-        {/* Pass props correctly to Symptoms page */}
         <Route
-          path="/symptoms"
+          path="/MedicationReminder"
           element={
-            <Symptoms
-              setSelectedSymptoms={setSelectedSymptoms}
-              setScore={setScore}
-              setSeverity={setSeverity}
-            />
+            <ProtectedRoute>
+              <MedicationReminder />
+            </ProtectedRoute>
           }
         />
-        {/* Route for the result page with props */}
         <Route
-          path="/result"
+          path="/MedicationSummary"
           element={
-            <Result
-              selectedSymptoms={selectedSymptoms}
-              score={score}
-              severity={severity}
-            />
+            <ProtectedRoute>
+              <MedicationSummary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ambulance"
+          element={
+            <ProtectedRoute>
+              <AmbulanceBooking />
+            </ProtectedRoute>
           }
         />
       </Routes>

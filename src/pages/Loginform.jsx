@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // ✅ Import context
 import flexisaflogo from "../assets/flexisaf-logo.jpg";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // ✅ Use context
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -16,32 +18,20 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Get stored user from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    const userData = {
-      email: formData.email,
-      password: formData.password
+    if (
+      storedUser &&
+      formData.email === storedUser.email &&
+      formData.password === storedUser.password
+    ) {
+      // ✅ Set token & update context state
+      login("mockToken123"); // can be any string/token
+      alert("Login successful!");
+      navigate("/dashboard");
+    } else {
+      alert("Invalid email or password.");
     }
-    fetch('http://localhost:8080/api/auth/login', {
-      method:'POST',
-      body: JSON.stringify(userData),
-      headers:{
-        'Content-Type':'application/json'
-      },
-      credentials:"include"
-    }
-  )
-    .then(res => res.json())
-    .then(data =>{
-        localStorage.setItem('token',data.jwtToken)
-        if (formData.email == data.email) {
-          alert("Login successful!");
-          navigate("/dashboard");
-        } else {
-          alert("Invalid email or password.");
-        }
-    });
-  
   };
 
   return (
