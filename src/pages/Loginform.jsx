@@ -17,18 +17,31 @@ function LoginForm() {
     e.preventDefault();
 
     // ✅ Get stored user from localStorage
-    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (
-      storedUser &&
-      formData.email === storedUser.email &&
-      formData.password === storedUser.password
-    ) {
-      alert("Login successful!");
-      navigate("/dashboard");
-    } else {
-      alert("Invalid email or password.");
+    const userData = {
+      email: formData.email,
+      password: formData.password
     }
+    fetch('http://localhost:8080/api/auth/login', {
+      method:'POST',
+      body: JSON.stringify(userData),
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:"include"
+    }
+  )
+    .then(res => res.json())
+    .then(data =>{
+        localStorage.setItem('token',data.jwtToken)
+        if (formData.email == data.email) {
+          alert("Login successful!");
+          navigate("/dashboard");
+        } else {
+          alert("Invalid email or password.");
+        }
+    });
+  
   };
 
   return (
