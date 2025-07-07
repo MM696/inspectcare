@@ -20,9 +20,20 @@ function MedicationReminder() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const token = localStorage.getItem('token');
+
   const handleSave = (e) => {
     e.preventDefault();
-    localStorage.setItem("medication", JSON.stringify(formData));
+    fetch('http://localhost:8080/med/create', {
+      method:'POST',
+      body: JSON.stringify(formData),
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:'Bearer '+token
+      },
+      credentials:"include"
+    })
+    .then((res) => console.log(res));
     alert("Medication Saved!");
   };
 
