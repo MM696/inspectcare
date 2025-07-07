@@ -29,7 +29,7 @@ label {
 }
 
 .buttongrouplabel {
-    display: block;
+  display: block;
 }
 
 input {
@@ -69,11 +69,11 @@ button.active {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  flex-wrap: wrap; /* Optional: allows wrap on small screens */
+  flex-wrap: wrap;
 }
 
 .symptom-button {
-  flex: 1 1 200px; /* grow/shrink with a base width */
+  flex: 1 1 200px;
   max-width: 200px;
   padding: 1rem;
   border: 2px solid #ccc;
@@ -87,7 +87,25 @@ button.active {
   background-color: #007bff;
   color: white;
   border-color: #0056b3;
+  outline: 3px solid #000;
+  box-shadow: 0 0 0 2px white inset;
 }
+
+.symptom-button.severe {
+  background-color: #dc2626;
+  color: white;
+}
+
+.symptom-button.moderate {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.symptom-button.mild {
+  background-color: #10b981;
+  color: white;
+}
+
 .summary {
   background-color: white;
   padding: 16px;
@@ -98,41 +116,22 @@ button.active {
 .severity {
   color: red;
 }
-.symptom-button.severe {
-  background-color: #dc2626; /* red */
-  color: white;
-}
 
-.symptom-button.moderate {
-  background-color: #f59e0b; /* orange */
-  color: white;
-}
-
-.symptom-button.mild {
-  background-color: #10b981; /* green */
-  color: white;
-}
-
-/* Maintain active style */
-.symptom-button.active {
-  outline: 3px solid #000;
-  box-shadow: 0 0 0 2px white inset;
-}
 .get-result-button {
-  background-color: #1310b9; /* Teal green */
+  background-color: #28a745;
   color: white;
   border: none;
-  padding: 12px 24px;
   font-size: 1rem;
-  font-weight: bold;
+  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .get-result-button:hover {
-  background-color: #059669;
+  background-color: #218838;
   transform: translateY(-2px);
 }
 
@@ -146,15 +145,13 @@ button.active {
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Header */
-.container2 h1{
+.container2 h1 {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
 
-/* Result button styling */
 .result-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -170,7 +167,6 @@ button.active {
   cursor: pointer;
 }
 
-/* Result summary */
 .result-summary {
   background-color: #f0f0f0;
   padding: 1.5rem;
@@ -196,7 +192,6 @@ button.active {
   margin-top: 1rem;
 }
 
-/* Warning card */
 .card.warning-card {
   background-color: #ffe5e5;
   border-left: 6px solid #ff4d4f;
@@ -216,7 +211,6 @@ button.active {
   line-height: 1.5;
 }
 
-/* Footer note */
 .footer-note {
   background-color: #f9f9f9;
   padding: 1rem;
@@ -226,28 +220,11 @@ button.active {
   margin-top: 1.5rem;
 }
 
-/* Navigation button */
-.get-result-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.get-result-button:hover {
-  background-color: #218838;
-}
-
-.container2 .top-right-button{
-    position: absolute;
+.container2 .top-right-button {
+  position: absolute;
   top: 20px;
   right: 20px;
-
-} 
+}
 
 .next-button {
   padding: 12px 24px;

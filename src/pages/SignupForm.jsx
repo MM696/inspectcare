@@ -15,7 +15,6 @@ export default function SignUpForm() {
 
   const navigate = useNavigate();
 
-  // ✅ Add this function to fix the "handleChange not defined" error
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -24,7 +23,7 @@ export default function SignUpForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, email, username, password, confirmPassword, agreed } =
       formData;
@@ -43,24 +42,33 @@ export default function SignUpForm() {
       }
 
       const userData = {
-        email:email,
+        email: email,
         username: username,
-        password:password,
-        fullname:fullName
-    }
+        password: password,
+        fullname: fullName,
+      };
 
-      fetch('http://localhost:8080/api/user/create',
-        {
-          method: "post",
-          body:JSON.stringify(userData),
-          headers:{
-           'Content-Type':'application/json'
-          }
-         })
-     .then(res =>  res.data);
+      try {
+        const response = await fetch("http://localhost:8080/api/user/create", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      alert("Account created!");
-      navigate("/login");
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Account created!");
+          navigate("/login");
+        } else {
+          alert(data.message || "Failed to create account.");
+        }
+      } catch (error) {
+        console.error("Error creating account:", error);
+        alert("An error occurred. Please try again.");
+      }
     } else {
       alert("Please fill in all fields and agree to the policy.");
     }

@@ -19,12 +19,14 @@
 .right-button {
   right: 20px;
 }
-.medication-form1 .medication-form2 .medication-form3{
+.medication-form1,
+.medication-form2,
+.medication-form3 {
   max-width: 900px;
   margin: auto;
   padding: 20px;
   position: relative;
-   display: grid;
+  display: grid;
 }
 
 .medication-form{
