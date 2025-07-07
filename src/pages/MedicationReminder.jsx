@@ -24,7 +24,7 @@ function MedicationReminder() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8080/med/create', {
+    fetch('https://health-inspector.onrender.com/med/create', {
       method:'POST',
       body: JSON.stringify(formData),
       headers:{

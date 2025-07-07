@@ -22,7 +22,7 @@ function LoginForm() {
       email: formData.email,
       password: formData.password
     }
-    fetch('http://localhost:8080/api/auth/login', {
+    fetch('https://health-inspector.onrender.com/api/auth/login', {
       method:'POST',
       body: JSON.stringify(userData),
       headers:{

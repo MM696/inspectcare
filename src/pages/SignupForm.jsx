@@ -49,7 +49,7 @@ export default function SignUpForm() {
         fullname:fullName
     }
 
-      fetch('http://localhost:8080/api/user/create',
+      fetch('https://health-inspector.onrender.com/api/user/create',
         {
           method: "post",
           body:JSON.stringify(userData),
