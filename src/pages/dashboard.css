@@ -1,0 +1,59 @@
+.dashboard-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.brand-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.dashboard-header {
+  background-color: #007bff;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.user-icon {
+  font-size: 2rem;
+}
+
+.dashboard-grid, .dashboard-grid2{
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+ margin: 10px auto;
+  width: 100%;
+  max-width: 960px;
+}
+
+
+.dashboard-button {
+  width: 100%;
+  max-width: 250px;
+  padding: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #0056b3;
+}

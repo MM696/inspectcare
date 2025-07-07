@@ -1,0 +1,55 @@
+.booking-container {
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  color: #222;
+}
+
+.booking-image-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.booking-image {
+  width: 140px;
+}
+
+.booking-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.booking-subtext {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.booking-box {
+  border: 2px solid #007bff;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 500px;
+  text-align: left;
+}
+
+.booking-box a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.booking-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.booking-button:hover {
+  background-color: #0056b3;
+}
