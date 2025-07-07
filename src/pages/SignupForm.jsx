@@ -42,10 +42,22 @@ export default function SignUpForm() {
         return;
       }
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ email, password, username, fullName })
-      );
+      const userData = {
+        email:email,
+        username: username,
+        password:password,
+        fullname:fullName
+    }
+
+      fetch('http://localhost:8080/api/user/create',
+        {
+          method: "post",
+          body:JSON.stringify(userData),
+          headers:{
+           'Content-Type':'application/json'
+          }
+         })
+     .then(res =>  res.data);
 
       alert("Account created!");
       navigate("/login");
