@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import flexisaflogo from "../assets/flexisaf-logo.jpg";
+import "./form.css";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -35,7 +36,7 @@ function LoginForm() {
       .then((data) => {
         localStorage.setItem("token", data.jwtToken);
         if (formData.email === data.email) {
-          login(data.jwtToken); // ✅ update context
+          login(data.jwtToken); // update context
           alert("Login successful!");
           navigate("/dashboard");
         } else {
@@ -79,7 +80,7 @@ function LoginForm() {
           </div>
 
           <div className="signup-redirect">
-            Don’t have an account? <Link to="/signup">Sign up</Link>
+            Dont have an account? <Link to="/signup">Sign up</Link>
           </div>
         </form>
       </div>

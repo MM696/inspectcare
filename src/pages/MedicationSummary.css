@@ -4,6 +4,7 @@
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .title {
@@ -17,13 +18,14 @@
   border: 1px solid #ccc;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
 .summary-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .summary-list li {
@@ -32,6 +34,7 @@
   position: relative;
   padding-left: 30px;
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .summary-list li::before {
@@ -56,6 +59,7 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
+  z-index: 10;
 }
 
 .nav-button.left {
@@ -64,4 +68,45 @@
 
 .nav-button.right {
   right: -10px;
+}
+
+/* ✅ Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .medication-summary-container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .summary-box {
+    padding: 1rem;
+  }
+
+  .summary-list li {
+    font-size: 1rem;
+    padding-left: 24px;
+  }
+
+  .summary-list li::before {
+    width: 12px;
+    height: 12px;
+    top: 5px;
+  }
+
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    top: 10px;
+  }
+
+  .nav-button.left {
+    left: 5px;
+  }
+
+  .nav-button.right {
+    right: 5px;
+  }
 }

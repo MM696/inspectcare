@@ -239,3 +239,76 @@ button.active {
 .next-button:hover {
   background-color: #1e40af;
 }
+
+@media (max-width: 768px) {
+  .container,
+  .container2 {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .symptom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .symptom-button {
+    max-width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .get-result-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .result-header .result-button,
+  .next-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .result-summary,
+  .card.warning-card,
+  .footer-note {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .container2 h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .container2 .top-right-button {
+    position: static;
+    margin: 0 auto 1rem auto;
+    display: block;
+    text-align: center;
+  }
+}
