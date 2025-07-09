@@ -10,7 +10,7 @@ import MedicationSummary from "./pages/MedicationSummary";
 import BookAppointmentpage from "./pages/BookAppointmentpage";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import AmbulanceBooking from "./pages/AmbulanceBooking";
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ import
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function App() {
@@ -21,13 +21,12 @@ function App() {
   const [appointmentTime, setAppointmentTime] = useState("");
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/flexisaf-inspectcare">
       <Routes>
         <Route path="/" element={<Navigate to="/signup" />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
 
-        {/* 🔒 Protected Routes */}
         <Route
           path="/dashboard"
           element={
