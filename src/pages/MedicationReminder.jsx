@@ -20,10 +20,25 @@ function MedicationReminder() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const token = localStorage.getItem('token');
+
   const handleSave = (e) => {
     e.preventDefault();
+    fetch('https://health-inspector.onrender.com/med/create', {
+      method:'POST',
+      body: JSON.stringify(formData),
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:'Bearer '+token
+      },
+      credentials:"include"
+    })
+   .then((res) => {
+    alert("Medication Saved!");
+
     localStorage.setItem("medication", JSON.stringify(formData));
     alert("Medication Saved!");
+   });
   };
 
   const handlePrev = () => {

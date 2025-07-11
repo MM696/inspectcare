@@ -41,14 +41,25 @@ export default function SignUpForm() {
         alert("Passwords do not match!");
         return;
       }
+          const userData = {
+            email:email,
+            username: username,
+            password:password,
+            fullname:fullName
+          }
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ email, password, username, fullName })
-      );
-
-      alert("Account created!");
-      navigate("/login");
+          fetch('https://health-inspector.onrender.com/api/user/create',
+            {
+              method: "post",
+              body:JSON.stringify(userData),
+              headers:{
+              'Content-Type':'application/json'
+              }
+            })
+        .then(res =>  {
+          alert("Account created!");
+          navigate("/login");
+        });
     } else {
       alert("Please fill in all fields and agree to the policy.");
     }
