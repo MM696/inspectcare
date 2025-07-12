@@ -15,30 +15,35 @@ function MedicationReminder() {
     instructions: "",
   });
 
+  const token = localStorage.getItem("token");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const token = localStorage.getItem('token');
-
   const handleSave = (e) => {
     e.preventDefault();
-    fetch('https://health-inspector.onrender.com/med/create', {
-      method:'POST',
+    fetch("http://localhost:8080/med/create", {
+      method: "POST",
       body: JSON.stringify(formData),
-      headers:{
-        'Content-Type':'application/json',
-        Authorization:'Bearer '+token
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
-      credentials:"include"
+      credentials: "include",
     })
-   .then((res) => {
-    alert("Medication Saved!");
-
-    localStorage.setItem("medication", JSON.stringify(formData));
-    alert("Medication Saved!");
-   });
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to save medication");
+        return res.json();
+      })
+      .then((data) => {
+        alert("Medication Saved!");
+        console.log(data);
+      })
+      .catch((err) => {
+        alert("Error saving medication: " + err.message);
+      });
   };
 
   const handlePrev = () => {

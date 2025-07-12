@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import SignUpForm from "./pages/signupform";
+import SignUpForm from "./pages/SignupForm";
 import LoginForm from "./pages/Loginform";
 import Dashboard from "./pages/dashboard";
 import Symptoms from "./pages/Symptoms";
@@ -10,7 +10,8 @@ import MedicationSummary from "./pages/MedicationSummary";
 import BookAppointmentpage from "./pages/BookAppointmentpage";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import AmbulanceBooking from "./pages/AmbulanceBooking";
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ import
+import ProtectedRoute from "./components/ProtectedRoute";
+import LandingPage from "./pages/Landingpage";
 import "./App.css";
 
 function App() {
@@ -21,13 +22,12 @@ function App() {
   const [appointmentTime, setAppointmentTime] = useState("");
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/flexisaf-inspectcare">
       <Routes>
-        <Route path="/" element={<Navigate to="/signup" />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
 
-        {/* 🔒 Protected Routes */}
         <Route
           path="/dashboard"
           element={

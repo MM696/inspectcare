@@ -145,3 +145,37 @@ a {
   color: #0a58ca;
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .signup-layout {
+    flex-direction: column;
+  }
+
+  .signup-left, .signup-right {
+    flex: 1 1 100%;
+    padding: 20px;
+  }
+
+  .signup-illustration {
+    max-width: 200px;
+  }
+
+  .form-box {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .signup-left button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-container .form-box {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
