@@ -1,0 +1,64 @@
+.ambulance-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+.ambulance-image {
+  width: 100px;
+  max-width: 100%;
+  margin: 1rem auto;
+}
+
+.ambulance-input,
+.ambulance-select {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: #e0e0e0;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.ambulance-button {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.ambulance-button:hover {
+  background-color: #0056b3;
+}
+
+/* 🔍 Responsive tweaks for small screens */
+@media (max-width: 480px) {
+  .ambulance-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .ambulance-input,
+  .ambulance-select,
+  .ambulance-button {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+
+  .ambulance-image {
+    width: 80px;
+  }
+}

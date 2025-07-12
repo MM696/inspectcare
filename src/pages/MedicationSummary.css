@@ -1,0 +1,112 @@
+.medication-summary-container {
+  position: relative;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.summary-box {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-list li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  position: relative;
+  padding-left: 30px;
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.summary-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+.nav-button {
+  position: absolute;
+  top: 20px;
+  font-size: 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav-button.left {
+  left: -10px;
+}
+
+.nav-button.right {
+  right: -10px;
+}
+
+/* ✅ Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .medication-summary-container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .summary-box {
+    padding: 1rem;
+  }
+
+  .summary-list li {
+    font-size: 1rem;
+    padding-left: 24px;
+  }
+
+  .summary-list li::before {
+    width: 12px;
+    height: 12px;
+    top: 5px;
+  }
+
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    top: 10px;
+  }
+
+  .nav-button.left {
+    left: 5px;
+  }
+
+  .nav-button.right {
+    right: 5px;
+  }
+}

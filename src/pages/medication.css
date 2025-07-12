@@ -1,0 +1,130 @@
+.nav-button {
+  position: absolute;
+  top: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.left-button {
+  left: 20px;
+}
+
+.right-button {
+  right: 20px;
+}
+
+.medication-form1,
+.medication-form2,
+.medication-form3 {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  display: grid;
+  box-sizing: border-box;
+}
+
+.medication-form {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.medication-form input,
+.medication-form textarea,
+.medication-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-group {
+  grid-column: span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-btn,
+.update-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1 1 48%;
+  min-width: 120px;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ✅ Responsive for mobile devices */
+@media (max-width: 768px) {
+  .medication-form {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-btn,
+  .update-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .nav-button,
+  .nav-arrow {
+    top: 10px;
+    font-size: 20px;
+    padding: 6px 12px;
+  }
+
+  .left-button,
+  .left-arrow {
+    left: 10px;
+  }
+
+  .right-button,
+  .right-arrow {
+    right: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { href, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import flexisafLogo from "../assets/flexisaf-logo.jpg";
 import "./form.css";
-import { Link } from "react-router-dom";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -17,26 +16,72 @@ export default function SignUpForm() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Account created!");
-    navigate("/login");
+    const { fullName, email, username, password, confirmPassword, agreed } =
+      formData;
+
+    if (
+      fullName &&
+      email &&
+      username &&
+      password &&
+      confirmPassword &&
+      agreed
+    ) {
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      const userData = {
+        email: email,
+        username: username,
+        password: password,
+        fullname: fullName,
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/user/create", {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Account created!");
+          navigate("/login");
+        } else {
+          alert(data.message || "Failed to create account.");
+        }
+      } catch (error) {
+        console.error("Error creating account:", error);
+        alert("An error occurred. Please try again.");
+      }
+    } else {
+      alert("Please fill in all fields and agree to the policy.");
+    }
   };
 
   return (
     <div className="signup-layout">
       <div className="signup-left">
         <img
-          src={flexisafLogo} // Replace with your actual image URL or local import
+          src={flexisafLogo}
           alt="InspectCare"
           className="signup-illustration"
         />
         <h3 className="brand-name">InspectCare</h3>
-
-        <button type="submit">Get Started</button>
       </div>
 
       <div className="signup-right">
@@ -87,6 +132,10 @@ export default function SignUpForm() {
             />
             I agree with <a href="#">Privacy and Policy</a>
           </label>
+
+          <button type="submit" className="get-started-button">
+            Get Started
+          </button>
         </form>
       </div>
     </div>

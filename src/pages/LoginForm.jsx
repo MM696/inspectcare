@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // ✅ Import context
 import flexisaflogo from "../assets/flexisaf-logo.jpg";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // ✅ Use context
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -14,8 +17,33 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Logging in with:", formData);
-    // Add login logic here
+
+    const userData = {
+      email: formData.email,
+      password: formData.password
+    }
+    fetch('https://health-inspector.onrender.com/api/auth/login', {
+      method:'POST',
+      body: JSON.stringify(userData),
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:"include"
+    }
+  )
+    .then(res => res.json())
+    .then(data =>{
+        localStorage.setItem('token',data.jwtToken)
+        if (formData.email == data.email) {
+          // ✅ Set token & update context state
+          login(data.jwtToken); // can be any string/token
+          alert("Login successful!");
+          navigate("/dashboard");
+        } else {
+          alert("Invalid email or password.");
+        }
+    });
+  
   };
 
   return (
@@ -39,9 +67,11 @@ function LoginForm() {
             required
             onChange={handleChange}
           />
+
           <button type="submit" className="login-btn">
             Login
           </button>
+
           <div className="forgot-password">
             <Link to="/forgot-password">Forgot Password?</Link>
           </div>

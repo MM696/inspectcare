@@ -1,0 +1,88 @@
+.booking-container {
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  color: #222;
+  box-sizing: border-box;
+}
+
+.booking-image-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.booking-image {
+  width: 120px;
+  max-width: 100%;
+}
+
+.booking-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.booking-subtext {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.booking-box {
+  border: 2px solid #007bff;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 500px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.booking-box a {
+  color: #007bff;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.booking-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+}
+
+.booking-button:hover {
+  background-color: #0056b3;
+}
+
+/* ✅ Responsive Styling */
+@media (max-width: 600px) {
+  .booking-container {
+    padding: 1rem;
+  }
+
+  .booking-title {
+    font-size: 1.5rem;
+  }
+
+  .booking-subtext {
+    font-size: 0.95rem;
+    padding: 0;
+  }
+
+  .booking-box {
+    padding: 0.8rem;
+    margin: 1rem;
+  }
+
+  .booking-button {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}
