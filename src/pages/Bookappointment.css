@@ -1,10 +1,9 @@
 .appointment-container {
   max-width: 1728px;
-  max-height: 1117px;
   margin: 0 auto;
   padding: 2rem;
-  position: relative;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .app-title {
@@ -13,13 +12,12 @@
   margin-bottom: 1rem;
 }
 
-.greeting, .sub-text {
+.greeting,
+.sub-text,
+.section-title {
   font-weight: bold;
-}
-
-.greeting, .sub-text, .section-title{
-    text-align: left;
-    margin: 1.5rem;
+  text-align: left;
+  margin: 1.5rem 0;
 }
 
 .doctor-info {
@@ -27,6 +25,7 @@
   align-items: center;
   gap: 1rem;
   margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
 .doctor-img {
@@ -35,36 +34,38 @@
   border-radius: 50%;
 }
 
+.doctor-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 100%;
+}
+
 .doctor-details h3 {
   margin: 0;
 }
 
-.doctor-details{
-    display: flex;
-    max-width: 1178px;
-    max-height: 138px;
-    gap: 184px;
-}
-
 .stats-box {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
   background-color: #cfe2ff;
   padding: 1rem;
   border-radius: 8px;
   margin: 1rem 0;
+  gap: 1rem;
 }
 
 .stats-box div {
+  flex: 1 1 45%;
   text-align: center;
 }
 
-.working-hours, .schedules {
+.working-hours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 1.5rem;
-}
-
-.working-hours{
-    display: flex;
 }
 
 .time-options button {
@@ -78,20 +79,19 @@
 
 .selectors {
   display: flex;
-  margin-right: 1rem;
-  padding: 0.5rem;
-  border-radius: 4px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
 }
 
-.selectors select{
- width: 150px;  
- height: 50px; 
+.selectors select {
+  width: 150px;
+  height: 50px;
 }
 
 .schedules {
   text-align: left;
   margin-top: 2rem;
-  margin-left: 0; /* Align it to the left edge */
 }
 
 .schedules h3 {
@@ -99,7 +99,7 @@
 }
 
 .biography {
-    text-align: left;
+  text-align: left;
 }
 
 .book-button {
@@ -128,11 +128,59 @@
 }
 
 .nav-arrow.left {
-left: 10px;
-
+  left: 10px;
 }
 
 .nav-arrow.right {
-
   right: 10px;
+}
+
+/* ✅ Responsive Styling */
+@media (max-width: 768px) {
+  .appointment-container {
+    padding: 1rem;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .doctor-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doctor-details {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stats-box {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .working-hours {
+    flex-direction: column;
+  }
+
+  .selectors {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .selectors select {
+    width: 100%;
+  }
+
+  .book-button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .nav-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
 }
