@@ -35,7 +35,7 @@ function MedicationReminder() {
     })
    .then((res) => {
     alert("Medication Saved!");
-
+    
     localStorage.setItem("medication", JSON.stringify(formData));
     alert("Medication Saved!");
    });

@@ -21,7 +21,7 @@ function App() {
   const [appointmentTime, setAppointmentTime] = useState("");
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/flexisaf-inspectcare">
       <Routes>
         <Route path="/" element={<Navigate to="/signup" />} />
         <Route path="/signup" element={<SignUpForm />} />

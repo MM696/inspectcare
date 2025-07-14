@@ -42,6 +42,10 @@ function LoginForm() {
         } else {
           alert("Invalid email or password.");
         }
+    })
+    .catch(err => {
+      console.log(err)
+      alert("Invalid email or password.");
     });
   
   };

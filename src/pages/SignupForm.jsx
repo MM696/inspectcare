@@ -57,6 +57,7 @@ export default function SignUpForm() {
               }
             })
         .then(res =>  {
+          console.log(res)
           alert("Account created!");
           navigate("/login");
         });
