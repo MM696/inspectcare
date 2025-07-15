@@ -107,19 +107,15 @@ const LandingPage = () => {
           <div className="footer-column">
             <h4>Product</h4>
             <ul>
-              <li>Symptom Checker</li>
-              <li>Dashboard</li>
-              <li>Alerts & Reminders</li>
-              <li>Caregiver Tools</li>
-            </ul>
-          </div>
-
-          {/* Explore Links */}
-          <div className="footer-column">
-            <h4>Explore</h4>
-            <ul>
-              <li>My Health Feed</li>
-              <li>Resources</li>
+              <li>
+                <a href="#">Symptom Checker</a>
+              </li>
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+              <li>
+                <a href="#">Alerts & Reminders</a>
+              </li>
             </ul>
           </div>
 
@@ -127,11 +123,15 @@ const LandingPage = () => {
           <div className="footer-column">
             <h4>Company</h4>
             <ul>
-              <li>Help Center</li>
-              <li>Contact</li>
-              <li>About</li>
-              <li>Privacy Policy</li>
-              <li>Terms of Use</li>
+              <li>
+                <a href="#">Help Center</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
             </ul>
           </div>
         </div>
