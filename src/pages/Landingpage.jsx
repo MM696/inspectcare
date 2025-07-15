@@ -99,64 +99,12 @@ const LandingPage = () => {
 
       <footer className="footer">
         <div className="footer-container">
-          {/* Newsletter Section */}
-          <div className="footer-column">
-            <h4>Subscribe to our newsletter</h4>
-            <form
-              className="subscribe-form"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="text"
-                className="subscribe-input"
-                placeholder="Your name"
-                required
-              />
-              <input
-                type="email"
-                className="subscribe-input"
-                placeholder="Your email"
-                required
-              />
-              <button type="submit" className="subscribe-button">
-                Subscribe
-              </button>
-            </form>
-          </div>
-
           {/* Logo and Description */}
           <div className="footer-column">
             <h2 className="footer-logo">InspectCare</h2>
             <p className="footer-description">
               Hassle-free health monitoring and proactive symptom checking.
             </p>
-            <div className="footer-socials">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={twitterIcon} alt="Twitter" className="icon" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={facebookIcon} alt="Facebook" className="icon" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={linkedinIcon} alt="LinkedIn" className="icon" />
-              </a>
-            </div>
-            <div className="footer-status">
-              <span className="status-indicator"></span>
-              <span>All systems operational</span>
-            </div>
           </div>
 
           {/* Product */}
@@ -189,18 +137,52 @@ const LandingPage = () => {
               <li>Privacy Policy</li>
               <li>Terms of Use</li>
             </ul>
-            <h4>Blog</h4>
-            <ul>
-              <li>Health Tips</li>
-              <li>Product Updates</li>
-              <li>Announcements</li>
-            </ul>
           </div>
-
-          {/* Support & Legal */}
         </div>
-
-        {/* Bottom line */}
+        {/* Newsletter Section */}
+        <div className="footer-column">
+          <h4>SUBSCRIBE TO OUR NEWSLETTER</h4>
+          <form className="subscribe-form" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              className="subscribe-input"
+              placeholder="Your name"
+              required
+            />
+            <input
+              type="email"
+              className="subscribe-input"
+              placeholder="Your email"
+              required
+            />
+            <button type="submit" className="subscribe-button">
+              Subscribe
+            </button>
+          </form>
+        </div>
+        <div className="footer-socials">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={twitterIcon} alt="Twitter" className="icon" />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={facebookIcon} alt="Facebook" className="icon" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={linkedinIcon} alt="LinkedIn" className="icon" />
+          </a>
+        </div>
         <div className="footer-bottom">
           <p>
             &copy; {new Date().getFullYear()} InspectCare. All rights reserved.
