@@ -97,11 +97,10 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
-        <div className="footer-content">
-          {/* Subscribe Form */}
-          <div className="footer-subscribe">
+        <div className="footer-container">
+          {/* Newsletter Section */}
+          <div className="footer-column">
             <h4>Subscribe to our newsletter</h4>
             <form
               className="subscribe-form"
@@ -109,14 +108,14 @@ const LandingPage = () => {
             >
               <input
                 type="text"
-                placeholder="Enter your name"
                 className="subscribe-input"
+                placeholder="Your name"
                 required
               />
               <input
                 type="email"
-                placeholder="Enter your email"
                 className="subscribe-input"
+                placeholder="Your email"
                 required
               />
               <button type="submit" className="subscribe-button">
@@ -125,44 +124,92 @@ const LandingPage = () => {
             </form>
           </div>
 
-          {/* Social Media Links */}
-          <div className="social-media">
-            <h4>Follow us</h4>
-            <div className="social-icons">
+          {/* Logo and Description */}
+          <div className="footer-column">
+            <h2 className="footer-logo">InspectCare</h2>
+            <p className="footer-description">
+              Hassle-free health monitoring and proactive symptom checking.
+            </p>
+            <div className="footer-socials">
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={twitterIcon} alt="Twitter" />
+                <img src={twitterIcon} alt="Twitter" className="icon" />
               </a>
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={facebookIcon} alt="Facebook" />
+                <img src={facebookIcon} alt="Facebook" className="icon" />
               </a>
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={linkedinIcon} alt="LinkedIn" />
+                <img src={linkedinIcon} alt="LinkedIn" className="icon" />
               </a>
+            </div>
+            <div className="footer-status">
+              <span className="status-indicator"></span>
+              <span>All systems operational</span>
             </div>
           </div>
 
-          {/* Footer Links */}
-          <div className="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
+          {/* Product */}
+          <div className="footer-column">
+            <h4>Product</h4>
+            <ul>
+              <li>Symptom Checker</li>
+              <li>Dashboard</li>
+              <li>Alerts & Reminders</li>
+              <li>Caregiver Tools</li>
+            </ul>
           </div>
 
+          {/* Explore */}
+          <div className="footer-column">
+            <h4>Explore</h4>
+            <ul>
+              <li>My Health Feed</li>
+              <li>Resources</li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div className="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li>Help Center</li>
+              <li>Contact</li>
+              <li>About</li>
+              <li>Privacy Policy</li>
+              <li>Terms of Use</li>
+            </ul>
+            <h4>Blog</h4>
+            <ul>
+              <li>Health Tips</li>
+              <li>Product Updates</li>
+              <li>Announcements</li>
+            </ul>
+          </div>
+
+          {/* Support & Legal */}
+        </div>
+
+        {/* Bottom line */}
+        <div className="footer-bottom">
           <p>
             &copy; {new Date().getFullYear()} InspectCare. All rights reserved.
           </p>
+          <div className="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+            <a href="#">Code of Conduct</a>
+          </div>
         </div>
       </footer>
     </div>
