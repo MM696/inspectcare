@@ -48,7 +48,7 @@ export default function SignUpForm() {
       };
 
       try {
-        const response = await fetch("http://localhost:8080/api/user/create", {
+        const response = await fetch("https://health-inspector.onrender.com/api/user/create", {
           method: "POST",
           body: JSON.stringify(userData),
           headers: {
