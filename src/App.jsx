@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUpForm from "./pages/SignupForm";
-<<<<<<< HEAD
-import LoginForm from "./pages/Loginform";
-=======
 import { LoginForm } from "./pages/LoginForm";
->>>>>>> master
 import Dashboard from "./pages/dashboard";
 import Symptoms from "./pages/Symptoms";
 import Result from "./pages/Resultpage";
