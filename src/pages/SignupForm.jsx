@@ -12,6 +12,7 @@ export default function SignUpForm() {
     confirmPassword: "",
     agreed: false,
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -48,7 +49,7 @@ export default function SignUpForm() {
       };
 
       try {
-        const response = await fetch("https://health-inspector.onrender.com/api/user/create", {
+        const response = await fetch("http://localhost:8080/api/user/create", {
           method: "POST",
           body: JSON.stringify(userData),
           headers: {
@@ -88,6 +89,7 @@ export default function SignUpForm() {
         <form className="form-box" onSubmit={handleSubmit}>
           <h2>Sign up</h2>
           <p className="subtext">Join us for better health</p>
+
           <input
             type="text"
             name="fullName"
@@ -123,6 +125,7 @@ export default function SignUpForm() {
             onChange={handleChange}
             required
           />
+
           <label className="checkbox-container">
             <input
               type="checkbox"

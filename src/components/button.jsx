@@ -29,11 +29,3 @@ export const Button = ({
     </button>
   );
 };
-
-// Optional: prop type checking
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(["button", "submit", "reset"]),
-  variant: PropTypes.oneOf(["primary", "secondary", "outline", "danger"]),
-  className: PropTypes.string,
-};

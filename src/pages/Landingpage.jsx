@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "../components/button";
+import { useNavigate } from "react-router-dom";
 import { Lightbulb, Target, HeartHandshake } from "lucide-react";
 import "../pages/landingpage.css";
-import { useNavigate } from "react-router-dom";
+
+import logo from "../assets/InspectCare-logo.png";
+import heroImage from "../assets/flexisaf-logo.jpg";
 import twitterIcon from "../assets/twitter.png";
 import facebookIcon from "../assets/facebook.png";
 import linkedinIcon from "../assets/linkedin.png";
-import logo from "../assets/InspectCare-logo.png";
-import heroImage from "../assets/flexisaf-logo.jpg"; // ✅ fixed import
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -17,18 +17,18 @@ const LandingPage = () => {
       {/* Navbar */}
       <header className="navbar">
         <h1 className="logo-landingpage">
-          <img src={logo} alt="inspectcare-logo" />
+          <img src={logo} alt="InspectCare logo" />
           InspectCare
         </h1>
         <nav className="nav-buttons">
           <button className="nav-btn login" onClick={() => navigate("/login")}>
-            login
+            Login
           </button>
           <button
             className="nav-btn signup"
             onClick={() => navigate("/signup")}
           >
-            sign up
+            Sign Up
           </button>
         </nav>
       </header>
@@ -46,26 +46,22 @@ const LandingPage = () => {
               className="get-started-btn"
               onClick={() => navigate("/signup")}
             >
-              Get started
+              Get Started
             </button>
             <div className="hero-features">
-              <div>🫀 Cardiovascular tracking</div>
-              <div>⏱️ Real-time symptom alerts</div>
-              <div>📊 Personalized insights</div>
+              <div>🫀 Cardiovascular Tracking</div>
+              <div>⏱️ Real-Time Alerts</div>
+              <div>📊 Personalized Insights</div>
             </div>
           </div>
 
           <div className="hero-img-container">
-            <img
-              src={heroImage} // ✅ fixed image source
-              alt="Health monitoring"
-              className="hero-img"
-            />
+            <img src={heroImage} alt="Health monitoring" className="hero-img" />
           </div>
         </div>
       </section>
 
-      {/* Info Cards */}
+      {/* Info Cards Section */}
       <section className="info-section">
         <div className="info-card">
           <Lightbulb className="info-icon blue" />
@@ -74,9 +70,8 @@ const LandingPage = () => {
             InspectCare is an advanced symptom checker system for cardiovascular
             diseases, designed to assist users with early detection and
             proactive health management. Our target audience includes:
-            individuals concerned about heart health, patients at risk of
-            cardiovascular diseases, healthcare providers, and health-conscious
-            users.
+            individuals concerned about heart health, patients at risk,
+            providers, and health-conscious users.
           </p>
         </div>
         <div className="info-card">
@@ -99,70 +94,105 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="footer-content">
-          {/* Subscribe Form */}
-          <div className="footer-subscribe">
-            <h4>Subscribe to our newsletter</h4>
-            <form
-              className="subscribe-form"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="text"
-                placeholder="Enter your name"
-                className="subscribe-input"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="subscribe-input"
-                required
-              />
-              <button type="submit" className="subscribe-button">
-                Subscribe
-              </button>
-            </form>
+        <div className="footer-container">
+          {/* Brand & Description */}
+          <div className="footer-column">
+            <h2 className="footer-logo">InspectCare</h2>
+            <p className="footer-description">
+              Hassle-free health monitoring and proactive symptom checking.
+            </p>
           </div>
 
-          {/* Social Media Links */}
-          <div className="social-media">
-            <h4>Follow us</h4>
-            <div className="social-icons">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={twitterIcon} alt="Twitter" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={facebookIcon} alt="Facebook" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={linkedinIcon} alt="LinkedIn" />
-              </a>
-            </div>
+          {/* Product Links */}
+          <div className="footer-column">
+            <h4>Product</h4>
+            <ul>
+              <li>
+                <a href="#">Symptom Checker</a>
+              </li>
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+              <li>
+                <a href="#">Alerts & Reminders</a>
+              </li>
+            </ul>
           </div>
 
-          {/* Footer Links */}
-          <div className="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
+          {/* Company Links */}
+          <div className="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li>
+                <a href="#">Help Center</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
+            </ul>
           </div>
+        </div>
 
+        {/* Newsletter */}
+        <div className="footer-column">
+          <h4>SUBSCRIBE TO OUR NEWSLETTER</h4>
+          <form className="subscribe-form" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              className="subscribe-input"
+              placeholder="Your name"
+              required
+            />
+            <input
+              type="email"
+              className="subscribe-input"
+              placeholder="Your email"
+              required
+            />
+            <button type="submit" className="subscribe-button">
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        {/* Socials */}
+        <div className="footer-socials">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={twitterIcon} alt="Twitter" className="icon" />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={facebookIcon} alt="Facebook" className="icon" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={linkedinIcon} alt="LinkedIn" className="icon" />
+          </a>
+        </div>
+
+        {/* Bottom Info */}
+        <div className="footer-bottom">
           <p>
             &copy; {new Date().getFullYear()} InspectCare. All rights reserved.
           </p>
+          <div className="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+            <a href="#">Code of Conduct</a>
+          </div>
         </div>
       </footer>
     </div>

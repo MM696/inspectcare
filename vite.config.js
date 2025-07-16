@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/flexisaf-inspectcare/", // MUST match repo name
+  base: '/flexisaf-inspectcare/', // MUST match repo name
 });
