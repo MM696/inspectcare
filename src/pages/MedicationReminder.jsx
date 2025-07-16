@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./medication.css";
 
 function MedicationReminder() {
@@ -14,6 +15,7 @@ function MedicationReminder() {
     alertType: "push",
     instructions: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,11 +40,11 @@ function MedicationReminder() {
   };
 
   const handlePrev = () => {
-    console.log("Previous page");
+    navigate("/dashboard");
   };
 
   const handleNext = () => {
-    console.log("Next page");
+    navigate("/dashboard");
   };
 
   return (

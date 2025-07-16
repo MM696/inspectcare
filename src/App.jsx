@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import SignUpForm from "./pages/SignupForm";
-import  LoginForm from "./pages/LoginForm";
+import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/dashboard";
 import Symptoms from "./pages/Symptoms";
 import Result from "./pages/Resultpage";
@@ -22,7 +22,7 @@ function App() {
   const [appointmentTime, setAppointmentTime] = useState("");
 
   return (
-    <BrowserRouter basename="/flexisaf-inspectcare">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUpForm />} />
@@ -107,7 +107,7 @@ function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
