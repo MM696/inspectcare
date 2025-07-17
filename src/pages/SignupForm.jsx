@@ -5,7 +5,7 @@ import "./form.css";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     username: "",
     password: "",
@@ -15,7 +15,6 @@ export default function SignUpForm() {
 
   const navigate = useNavigate();
 
-  // ✅ Add this function to fix the "handleChange not defined" error
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -24,45 +23,40 @@ export default function SignUpForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { fullName, email, username, password, confirmPassword, agreed } =
-      formData;
 
-    if (
-      fullName &&
-      email &&
-      username &&
-      password &&
-      confirmPassword &&
-      agreed
-    ) {
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
+    const { fullname, email, username, password, confirmPassword, agreed } = formData;
 
-      const userData = {
-        email:email,
-        username: username,
-        password:password,
-        fullname:fullName
+    if (!fullname || !email || !username || !password || !confirmPassword || !agreed) {
+      return alert("Please fill in all fields and agree to the privacy policy.");
     }
 
-      fetch('https://health-inspector.onrender.com/api/user/create',
-        {
-          method: "post",
-          body:JSON.stringify(userData),
-          headers:{
-           'Content-Type':'application/json'
-          }
-         })
-     .then(res =>  res.data);
+    if (password !== confirmPassword) {
+      return alert("Passwords do not match!");
+    }
 
-      alert("Account created!");
+    const userData = { fullname, email, username, password };
+
+    try {
+      const res = await fetch("https://health-inspector.onrender.com/api/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Signup failed");
+      }
+
+      alert("Account created successfully!");
       navigate("/login");
-    } else {
-      alert("Please fill in all fields and agree to the policy.");
+    } catch (error) {
+      alert(`Signup failed: ${error.message}`);
+      console.error("Signup error:", error);
     }
   };
 
@@ -84,7 +78,7 @@ export default function SignUpForm() {
 
           <input
             type="text"
-            name="fullName"
+            name="fullname"
             placeholder="Full Name"
             onChange={handleChange}
             required
@@ -125,7 +119,7 @@ export default function SignUpForm() {
               onChange={handleChange}
               required
             />
-            I agree with <a href="#">Privacy and Policy</a>
+            I agree with <a href="#">Privacy Policy</a>
           </label>
 
           <button type="submit" className="get-started-button">

@@ -1,27 +1,31 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+import "./medication.css";
 
-const MedicationReminder = () => {
+function MedicationReminder() {
   const [formData, setFormData] = useState({
     medicationName: "",
+    prescribingDoctor: "",
     dosage: "",
-    frequency: "",
     timeOfDay: "",
     startDate: "",
+    frequency: "",
     endDate: "",
+    medicationLocation: "",
+    alertType: "push",
+    instructions: "",
   });
-
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const token = localStorage.getItem("token");
 
+  const handleSave = (e) => {
+    e.preventDefault();
     fetch("https://health-inspector.onrender.com/med/create", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -30,98 +34,115 @@ const MedicationReminder = () => {
         Authorization: "Bearer " + token,
       },
       credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to save medication");
-        return res.json();
-      })
-      .then((data) => {
-        alert("Medication Saved!");
-        console.log(data);
-      })
-      .catch((err) => {
-        alert("Error saving medication: " + err.message);
-      });
+    }).then((res) => console.log(res));
+    alert("Medication Saved!");
+  };
+
+  const handlePrev = () => {
+    navigate("/dashboard");
+  };
+
+  const handleNext = () => {
+    navigate("/dashboard");
   };
 
   return (
-    <div className="flex bg-gradient-to-b from-blue-100 via-white to-blue-50 min-h-screen">
-      <Sidebar />
-      <div className="flex flex-col flex-1">
-        <Navbar />
-        <div className="flex flex-col items-center justify-center flex-1 p-4">
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Medication Reminder
-            </h2>
-            <input
-              type="text"
-              name="medicationName"
-              value={formData.medicationName}
-              onChange={handleChange}
-              placeholder="Medication Name"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="dosage"
-              value={formData.dosage}
-              onChange={handleChange}
-              placeholder="Dosage (e.g., 500mg)"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="frequency"
-              value={formData.frequency}
-              onChange={handleChange}
-              placeholder="Frequency (e.g., twice a day)"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="timeOfDay"
-              value={formData.timeOfDay}
-              onChange={handleChange}
-              placeholder="Time of Day (e.g., 8AM & 8PM)"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <label className="block mb-1 font-semibold">Start Date</label>
-            <input
-              type="date"
-              name="startDate"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <label className="block mb-1 font-semibold">End Date</label>
-            <input
-              type="date"
-              name="endDate"
-              value={formData.endDate}
-              onChange={handleChange}
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-            >
-              Set Reminder
-            </button>
-          </form>
+    <div className="medication-container">
+      <button className="nav-button left-button" onClick={handlePrev}>
+        ←
+      </button>
+      <button className="nav-button right-button" onClick={handleNext}>
+        →
+      </button>
+
+      <h1>
+        <img src="no image found" alt="med-icon" /> Medication
+      </h1>
+
+      <form onSubmit={handleSave}>
+        <div className="medication-form">
+          <input
+            name="medicationName"
+            onChange={handleChange}
+            value={formData.medicationName}
+            placeholder="Medication Name"
+          />
+          <input
+            name="prescribingDoctor"
+            onChange={handleChange}
+            value={formData.prescribingDoctor}
+            placeholder="Prescribing Doctor"
+          />
+          <input
+            name="dosage"
+            onChange={handleChange}
+            value={formData.dosage}
+            placeholder="Dosage"
+          />
         </div>
-      </div>
+        <div className="medication-form">
+          <input
+            name="timeOfDay"
+            onChange={handleChange}
+            value={formData.timeOfDay}
+            placeholder="Time of the day"
+          />
+          <input
+            type="date"
+            name="startDate"
+            onChange={handleChange}
+            value={formData.startDate}
+          />
+          <input
+            name="frequency"
+            onChange={handleChange}
+            value={formData.frequency}
+            placeholder="Frequency"
+          />
+        </div>
+        <div className="medication-form">
+          <input
+            type="date"
+            name="endDate"
+            onChange={handleChange}
+            value={formData.endDate}
+          />
+          <input
+            name="medicationLocation"
+            onChange={handleChange}
+            value={formData.medicationLocation}
+            placeholder="Medication Location"
+          />
+          <label>Alert Type:</label>
+          <select
+            name="alertType"
+            value={formData.alertType}
+            onChange={handleChange}
+          >
+            <option value="push">Push Notification</option>
+            <option value="email">Email</option>
+            <option value="sms">SMS</option>
+          </select>
+        </div>
+
+        <textarea
+          name="instructions"
+          onChange={handleChange}
+          value={formData.instructions}
+          placeholder="Instructions"
+        />
+
+        <div className="button-group">
+          <button type="submit" className="save-btn">
+            Save
+          </button>
+          <button type="button" className="update-btn">
+            Update
+          </button>
+        </div>
+      </form>
     </div>
   );
-};
+}
 
 export default MedicationReminder;
