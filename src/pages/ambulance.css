@@ -5,6 +5,7 @@
   padding: 2rem;
   font-family: "Segoe UI", sans-serif;
   box-sizing: border-box;
+  position: relative; /* Required for absolute nav-button */
 }
 
 .ambulance-image {
@@ -44,6 +45,25 @@
   background-color: #0056b3;
 }
 
+/* 🔙 Back navigation button */
+.nav-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
+
 /* 🔍 Responsive tweaks for small screens */
 @media (max-width: 480px) {
   .ambulance-container {
@@ -60,5 +80,12 @@
 
   .ambulance-image {
     width: 80px;
+  }
+
+  .nav-button {
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
   }
 }
