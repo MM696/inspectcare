@@ -7,6 +7,22 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      {/* 🔙 Navigation Buttons */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "1rem",
+        }}
+      >
+        <button onClick={() => navigate(-1)} className="nav-button">
+          ⬅ Back
+        </button>
+        <button onClick={() => navigate("/")} className="nav-button">
+          🏠 Home
+        </button>
+      </div>
+
       <h1 className="brand-title">InspectCare</h1>
 
       <div className="dashboard-header">
@@ -31,18 +47,18 @@ function Dashboard() {
         </button>
         <button
           className="dashboard-button"
+          onClick={() => navigate("/BookAppointmentpage")}
+        >
+          Doctors
+        </button>
+        <button
+          className="dashboard-button"
           onClick={() => navigate("/BookingConfirmation")}
         >
           Appointments
         </button>
       </div>
       <div className="dashboard-grid 2">
-        <button
-          className="dashboard-button"
-          onClick={() => navigate("/BookAppointmentpage")}
-        >
-          Doctors
-        </button>
         <button
           className="dashboard-button"
           onClick={() => navigate("/MedicationSummary")}

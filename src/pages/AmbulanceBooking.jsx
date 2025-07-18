@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import "./ambulance.css"; // Make sure this file exists
+import { useNavigate } from "react-router-dom";
+import "./ambulance.css";
 import ambulance from "../assets/ambulance.jpg";
 
 const AmbulanceBooking = () => {
   const [location, setLocation] = useState("");
   const [emergencyType, setEmergencyType] = useState("");
+  const navigate = useNavigate();
 
   const handleBooking = () => {
     if (!location || !emergencyType) {
@@ -16,8 +18,16 @@ const AmbulanceBooking = () => {
     );
   };
 
+  const handleBack = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <div className="ambulance-container">
+      <button className="nav-button left-button" onClick={handleBack}>
+        ←
+      </button>
+
       <h1>Ambulance</h1>
       <img src={ambulance} alt="ambulance" className="ambulance-image" />
 

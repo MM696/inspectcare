@@ -12,6 +12,21 @@ import linkedinIcon from "../assets/linkedin.png";
 const LandingPage = () => {
   const navigate = useNavigate();
 
+  const handleNavigation = (path) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate(path);
+    } else {
+      alert("Please log in to access this feature.");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    alert("You have been logged out.");
+    navigate("/login");
+  };
+
   return (
     <div className="landing-container">
       {/* Navbar */}
@@ -21,15 +36,26 @@ const LandingPage = () => {
           InspectCare
         </h1>
         <nav className="nav-buttons">
-          <button className="nav-btn login" onClick={() => navigate("/login")}>
-            Login
-          </button>
-          <button
-            className="nav-btn signup"
-            onClick={() => navigate("/signup")}
-          >
-            Sign Up
-          </button>
+          {localStorage.getItem("token") ? (
+            <button className="nav-btn logout" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <button
+                className="nav-btn login"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+              <button
+                className="nav-btn signup"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </nav>
       </header>
 
@@ -54,7 +80,6 @@ const LandingPage = () => {
               <div>📊 Personalized Insights</div>
             </div>
           </div>
-
           <div className="hero-img-container">
             <img src={heroImage} alt="Health monitoring" className="hero-img" />
           </div>
@@ -62,7 +87,7 @@ const LandingPage = () => {
       </section>
 
       {/* Info Cards Section */}
-      <section className="info-section">
+      <section className="info-section" id="about-us">
         <div className="info-card">
           <Lightbulb className="info-icon blue" />
           <h3 className="info-title blue">About Us</h3>
@@ -95,7 +120,6 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-container">
-          {/* Brand & Description */}
           <div className="footer-column">
             <h2 className="footer-logo">InspectCare</h2>
             <p className="footer-description">
@@ -103,40 +127,46 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {/* Product Links */}
           <div className="footer-column">
             <h4>Product</h4>
             <ul>
               <li>
-                <a href="#">Symptom Checker</a>
+                <button
+                  onClick={() => handleNavigation("/dashboard")}
+                  className="footer-link-btn"
+                >
+                  Dashboard
+                </button>
               </li>
               <li>
-                <a href="#">Dashboard</a>
-              </li>
-              <li>
-                <a href="#">Alerts & Reminders</a>
+                <button
+                  onClick={() => handleNavigation("/medreminder")}
+                  className="footer-link-btn"
+                >
+                  Alerts & Reminders
+                </button>
               </li>
             </ul>
           </div>
 
-          {/* Company Links */}
           <div className="footer-column">
             <h4>Company</h4>
             <ul>
+              <li>
+                <a href="#about-us" className="footer-link">
+                  About
+                </a>
+              </li>
               <li>
                 <a href="#">Help Center</a>
               </li>
               <li>
                 <a href="#">Contact</a>
               </li>
-              <li>
-                <a href="#">About</a>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Newsletter */}
         <div className="footer-column">
           <h4>SUBSCRIBE TO OUR NEWSLETTER</h4>
           <form className="subscribe-form" onSubmit={(e) => e.preventDefault()}>
@@ -158,7 +188,6 @@ const LandingPage = () => {
           </form>
         </div>
 
-        {/* Socials */}
         <div className="footer-socials">
           <a
             href="https://twitter.com"
@@ -183,7 +212,6 @@ const LandingPage = () => {
           </a>
         </div>
 
-        {/* Bottom Info */}
         <div className="footer-bottom">
           <p>
             &copy; {new Date().getFullYear()} InspectCare. All rights reserved.
@@ -195,6 +223,11 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Back to Top Button */}
+      <a href="#" className="back-to-top-btn" title="Back to Top">
+        ⬆
+      </a>
     </div>
   );
 };

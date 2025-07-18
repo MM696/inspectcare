@@ -56,8 +56,29 @@ function Symptoms({ setScore, setSeverity, setSelectedSymptoms }) {
     navigate("/result");
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="container">
+      {/* Top Navigation Back Button */}
+      <div style={{ marginBottom: "1rem" }}>
+        <button
+          onClick={handleBack}
+          style={{
+            backgroundColor: "#2563eb",
+            color: "white",
+            border: "none",
+            padding: "10px 16px",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          ← Back
+        </button>
+      </div>
+
       <h1>InspectCare</h1>
 
       <div>

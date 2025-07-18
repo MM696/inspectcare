@@ -1,3 +1,11 @@
+.medication-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
 .nav-button {
   position: absolute;
   top: 20px;
@@ -16,25 +24,11 @@
   left: 20px;
 }
 
-.right-button {
-  right: 20px;
-}
-
-.medication-form1,
-.medication-form2,
-.medication-form3 {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  position: relative;
-  display: grid;
-  box-sizing: border-box;
-}
-
 .medication-form {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .medication-form input,
@@ -47,8 +41,14 @@
   box-sizing: border-box;
 }
 
+textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  margin-top: 10px;
+}
+
 .button-group {
-  grid-column: span 2;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -68,24 +68,12 @@
   min-width: 120px;
 }
 
-.nav-arrow {
-  position: absolute;
-  top: 20px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.left-arrow {
-  left: 20px;
-}
-
-.right-arrow {
-  right: 20px;
-}
-
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ✅ Responsive for mobile devices */
@@ -107,24 +95,18 @@ h1 {
     padding: 12px;
   }
 
-  .nav-button,
-  .nav-arrow {
+  .nav-button {
     top: 10px;
     font-size: 20px;
     padding: 6px 12px;
   }
 
-  .left-button,
-  .left-arrow {
+  .left-button {
     left: 10px;
-  }
-
-  .right-button,
-  .right-arrow {
-    right: 10px;
   }
 
   h1 {
     font-size: 1.5rem;
+    flex-direction: column;
   }
 }
