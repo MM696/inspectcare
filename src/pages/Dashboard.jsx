@@ -3,10 +3,11 @@ import "./dashboard.css";
 
 function Dashboard() {
   const navigate = useNavigate();
+  console.log("Dashboard mounted");
 
   return (
     <div className="dashboard-container">
-      {/* 🔙 Navigation Buttons */}
+      {/* Navigation Buttons */}
       <div
         style={{
           display: "flex",

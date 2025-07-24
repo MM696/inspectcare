@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext"; // ✅ Import context
+import { AuthContext } from "../context/AuthContext";
 import flexisaflogo from "../assets/flexisaf-logo.jpg";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [isLoggingIn, setIsLoggingIn] = useState(false); // ✅ New state
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // ✅ Use context
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -16,38 +17,46 @@ function LoginForm() {
   };
 
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setIsLoggingIn(true); // ✅ Start loading
 
-  const userData = {
-    email: formData.email,
-    password: formData.password,
-  };
+    const userData = {
+      email: formData.email.trim(),
+      password: formData.password,
+    };
 
-  fetch("https://health-inspector.onrender.com/api/auth/login", {
-    method: "POST",
-    body: JSON.stringify(userData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.jwtToken) {
-        localStorage.setItem("token", data.jwtToken);
-        console.log("Saved token:", localStorage.getItem("token"));
-        alert("Login successful!");
-        console.log("Navigating to dashboard...");
-
-        navigate("/dashboard"); // ✅ This will now work
-      } else {
-        alert("Invalid email or password.");
-      }
+    fetch("https://health-inspector.onrender.com/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
-      console.error("Login error:", error);
-      alert("Something went wrong. Please try again.");
-    });
-};
+      .then(async (res) => {
+        const text = await res.text();
+
+        try {
+          const data = JSON.parse(text);
+          if (data.jwtToken) {
+            localStorage.setItem("token", data.jwtToken);
+            alert("Login successful!");
+            navigate("/dashboard");
+          } else {
+            alert("Invalid email or password.");
+          }
+        } catch (err) {
+          console.error("Response is not valid JSON:", text);
+          alert(text);
+        }
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+        alert("Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        setIsLoggingIn(false); // ✅ Stop loading
+      });
+  };
 
   return (
     <div className="login-container">
@@ -71,8 +80,8 @@ function LoginForm() {
             onChange={handleChange}
           />
 
-          <button type="submit" className="login-btn">
-            Login
+          <button type="submit" className="login-btn" disabled={isLoggingIn}>
+            {isLoggingIn ? "Logging in..." : "Login"}
           </button>
 
           <div className="forgot-password">
