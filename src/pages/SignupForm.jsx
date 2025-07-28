@@ -13,6 +13,7 @@ export default function SignUpForm() {
     agreed: false,
   });
 
+  const [signingUp, setSigningUp] = useState(false); // ✅ new state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,6 +39,8 @@ export default function SignUpForm() {
 
     const userData = { fullname, email, username, password };
 
+    setSigningUp(true); // ✅ begin loading
+
     try {
       const res = await fetch("https://health-inspector.onrender.com/api/user/create", {
         method: "POST",
@@ -57,6 +60,8 @@ export default function SignUpForm() {
     } catch (error) {
       alert(`Signup failed: ${error.message}`);
       console.error("Signup error:", error);
+    } finally {
+      setSigningUp(false); // ✅ end loading
     }
   };
 
@@ -122,8 +127,12 @@ export default function SignUpForm() {
             I agree with <a href="#">Privacy Policy</a>
           </label>
 
-          <button type="submit" className="get-started-button">
-            Get Started
+          <button
+            type="submit"
+            className="get-started-button"
+            disabled={signingUp}
+          >
+            {signingUp ? "Signing up..." : "Get Started"}
           </button>
         </form>
       </div>
