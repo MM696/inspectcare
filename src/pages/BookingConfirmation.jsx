@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../pages/bookingconfirmation.css"; // External CSS
 import tick from "../assets/tick.jpg";
 
 const BookingConfirmation = ({ appointmentDate, appointmentTime }) => {

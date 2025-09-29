@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import flexisafLogo from "../assets/flexisaf-logo.jpg";
-import "./form.css";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -61,70 +60,103 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="signup-layout">
-      <div className="signup-left">
+    <div className="min-h-screen bg-gradient-hero flex flex-col lg:flex-row relative overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-grain-texture pointer-events-none"></div>
+      
+      {/* Left Side - Branding */}
+      <div className="flex-1 glass-card border-r border-white/20 flex flex-col items-center justify-center p-12 relative z-10 animate-fade-in-up">
         <img
           src={flexisafLogo}
           alt="InspectCare"
-          className="signup-illustration"
+          className="max-w-sm mb-8 rounded-2xl shadow-2xl"
         />
-        <h3 className="brand-name">InspectCare</h3>
+        <h3 className="text-4xl font-extrabold text-white font-inter text-shadow">
+          InspectCare
+        </h3>
       </div>
 
-      <div className="signup-right">
-        <form className="form-box" onSubmit={handleSubmit}>
-          <h2>Sign up</h2>
-          <p className="subtext">Join us for better health</p>
+      {/* Right Side - Form */}
+      <div className="flex-1 bg-white/5 backdrop-blur-lg flex items-center justify-center p-12 relative z-10">
+        <form 
+          className="glass-card p-10 w-full max-w-md animate-fade-in-up" 
+          style={{animationDelay: '0.4s'}}
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-3xl font-bold text-white mb-2 text-center font-inter">
+            Sign up
+          </h2>
+          <p className="text-white/80 text-center mb-8 text-lg">
+            Join us for better health
+          </p>
 
-          <input
-            type="text"
-            name="fullname"
-            placeholder="Full Name"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Set your password"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Re-enter password"
-            onChange={handleChange}
-            required
-          />
-
-          <label className="checkbox-container">
+          <div className="space-y-6">
             <input
-              type="checkbox"
-              name="agreed"
+              type="text"
+              name="fullname"
+              placeholder="Full Name"
               onChange={handleChange}
               required
+              className="glass-input w-full"
             />
-            I agree with <a href="#">Privacy Policy</a>
-          </label>
+            
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
+              className="glass-input w-full"
+            />
+            
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={handleChange}
+              required
+              className="glass-input w-full"
+            />
+            
+            <input
+              type="password"
+              name="password"
+              placeholder="Set your password"
+              onChange={handleChange}
+              required
+              className="glass-input w-full"
+            />
+            
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Re-enter password"
+              onChange={handleChange}
+              required
+              className="glass-input w-full"
+            />
 
-          <button type="submit" className="get-started-button">
-            Get Started
-          </button>
+            <label className="flex items-center text-white/90 text-sm">
+              <input
+                type="checkbox"
+                name="agreed"
+                onChange={handleChange}
+                required
+                className="mr-3 scale-125"
+              />
+              I agree with{' '}
+              <a href="#" className="text-blue-300 hover:text-white transition-colors duration-200 ml-1">
+                Privacy Policy
+              </a>
+            </label>
+
+            <button 
+              type="submit" 
+              className="btn-primary w-full text-lg py-4"
+            >
+              Get Started
+            </button>
+          </div>
         </form>
       </div>
     </div>

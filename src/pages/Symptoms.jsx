@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./symptoms.css";
 
 const symptomData = [
   { name: "Chest pain", score: 30 },

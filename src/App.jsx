@@ -12,7 +12,6 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import AmbulanceBooking from "./pages/AmbulanceBooking";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/Landingpage";
-import "./App.css";
 
 function App() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);

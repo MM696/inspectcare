@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Bookappointment.css";
 import { useNavigate } from "react-router-dom";
 
 const BookAppointmentpage = ({ setAppointmentDate, setAppointmentTime }) => {

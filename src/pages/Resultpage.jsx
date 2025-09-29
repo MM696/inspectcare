@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../pages/symptoms.css";
 
 const ResultPage = ({ selectedSymptoms, score, severity }) => {
   const navigate = useNavigate();

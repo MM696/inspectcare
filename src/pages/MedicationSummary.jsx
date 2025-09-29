@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./MedicationSummary.css";
 
 const MedicationSummary = () => {
   const [medication, setMedication] = useState(null);

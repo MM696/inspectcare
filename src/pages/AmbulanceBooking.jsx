@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./ambulance.css";
 import ambulance from "../assets/ambulance.jpg";
 
 const AmbulanceBooking = () => {
