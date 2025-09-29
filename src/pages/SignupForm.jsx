@@ -12,6 +12,7 @@ export default function SignUpForm() {
     agreed: false,
   });
 
+  const [signingUp, setSigningUp] = useState(false); // ✅ new state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -37,6 +38,8 @@ export default function SignUpForm() {
 
     const userData = { fullname, email, username, password };
 
+    setSigningUp(true); // ✅ begin loading
+
     try {
       const res = await fetch("https://health-inspector.onrender.com/api/user/create", {
         method: "POST",
@@ -56,6 +59,8 @@ export default function SignUpForm() {
     } catch (error) {
       alert(`Signup failed: ${error.message}`);
       console.error("Signup error:", error);
+    } finally {
+      setSigningUp(false); // ✅ end loading
     }
   };
 
@@ -136,6 +141,7 @@ export default function SignUpForm() {
               className="glass-input w-full"
             />
 
+<<<<<<< HEAD
             <label className="flex items-center text-white/90 text-sm">
               <input
                 type="checkbox"
@@ -157,6 +163,15 @@ export default function SignUpForm() {
               Get Started
             </button>
           </div>
+=======
+          <button
+            type="submit"
+            className="get-started-button"
+            disabled={signingUp}
+          >
+            {signingUp ? "Signing up..." : "Get Started"}
+          </button>
+>>>>>>> 76415a76b24dd3adb86d456122c204d525784a4e
         </form>
       </div>
     </div>

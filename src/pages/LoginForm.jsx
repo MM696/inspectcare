@@ -5,6 +5,7 @@ import flexisaflogo from "../assets/flexisaf-logo.jpg";
 
 function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [isLoggingIn, setIsLoggingIn] = useState(false); // ✅ New state
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -17,6 +18,7 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
 
     const userData = {
       email: formData.email,
@@ -48,6 +50,48 @@ function LoginForm() {
       });
   };
 
+=======
+    setIsLoggingIn(true); // ✅ Start loading
+
+    const userData = {
+      email: formData.email.trim(),
+      password: formData.password,
+    };
+
+    fetch("https://health-inspector.onrender.com/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        const text = await res.text();
+
+        try {
+          const data = JSON.parse(text);
+          if (data.jwtToken) {
+            localStorage.setItem("token", data.jwtToken);
+            alert("Login successful!");
+            navigate("/dashboard");
+          } else {
+            alert("Invalid email or password.");
+          }
+        } catch (err) {
+          console.error("Response is not valid JSON:", text);
+          alert(text);
+        }
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+        alert("Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        setIsLoggingIn(false); // ✅ Stop loading
+      });
+  };
+
+>>>>>>> 76415a76b24dd3adb86d456122c204d525784a4e
   return (
     <div className="min-h-screen bg-gradient-hero flex justify-center items-center p-4 relative overflow-hidden">
       {/* Background Texture */}
@@ -79,8 +123,13 @@ function LoginForm() {
             className="glass-input w-full"
           />
 
+<<<<<<< HEAD
           <button type="submit" className="btn-primary w-full text-lg py-4">
             Login
+=======
+          <button type="submit" className="login-btn" disabled={isLoggingIn}>
+            {isLoggingIn ? "Logging in..." : "Login"}
+>>>>>>> 76415a76b24dd3adb86d456122c204d525784a4e
           </button>
 
           <div className="text-center mt-6">

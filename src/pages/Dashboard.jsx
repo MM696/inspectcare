@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const navigate = useNavigate();
+  console.log("Dashboard mounted");
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-hero relative overflow-x-hidden">
       {/* Background Texture */}
       <div className="absolute inset-0 bg-grain-texture pointer-events-none"></div>
@@ -24,6 +26,24 @@ function Dashboard() {
             🏠 Home
           </button>
         </div>
+=======
+    <div className="dashboard-container">
+      {/* Navigation Buttons */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "1rem",
+        }}
+      >
+        <button onClick={() => navigate(-1)} className="nav-button">
+          ⬅ Back
+        </button>
+        <button onClick={() => navigate("/")} className="nav-button">
+          🏠 Home
+        </button>
+      </div>
+>>>>>>> 76415a76b24dd3adb86d456122c204d525784a4e
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-center text-white text-shadow font-inter">
           InspectCare
