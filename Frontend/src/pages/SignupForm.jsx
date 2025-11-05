@@ -84,14 +84,14 @@ export default function SignUpForm() {
       {/* Right Side - Form */}
       <div className="flex-1 bg-white/5 backdrop-blur-lg flex items-center justify-center p-12 relative z-10">
         <form 
-          className="glass-card p-10 w-full max-w-md animate-fade-in-up" 
+          className="glass-card p-10 w-full max-w-md animate-fade-in-up text-blue-500" 
           style={{animationDelay: '0.4s'}}
           onSubmit={handleSubmit}
         >
-          <h2 className="text-3xl font-bold text-white mb-2 text-center font-inter">
-            Sign up
+          <h2 className="text-4xl font-extrabold text-blue-500 mb-4 text-center font-inter">
+            Create Your InspectCare Account
           </h2>
-          <p className="text-white/80 text-center mb-8 text-lg">
+          <p className="text-blue-500 text-center mb-8 text-lg">
             Join us for better health
           </p>
 
@@ -102,7 +102,7 @@ export default function SignUpForm() {
               placeholder="Full Name"
               onChange={handleChange}
               required
-              className="glass-input w-full"
+              className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             
             <input
@@ -111,7 +111,7 @@ export default function SignUpForm() {
               placeholder="Email"
               onChange={handleChange}
               required
-              className="glass-input w-full"
+              className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             
             <input
@@ -120,7 +120,7 @@ export default function SignUpForm() {
               placeholder="Username"
               onChange={handleChange}
               required
-              className="glass-input w-full"
+              className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             
             <input
@@ -129,7 +129,7 @@ export default function SignUpForm() {
               placeholder="Set your password"
               onChange={handleChange}
               required
-              className="glass-input w-full"
+              className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             
             <input
@@ -138,11 +138,10 @@ export default function SignUpForm() {
               placeholder="Re-enter password"
               onChange={handleChange}
               required
-              className="glass-input w-full"
+              className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-<<<<<<< HEAD
-            <label className="flex items-center text-white/90 text-sm">
+            <label className="flex items-center text-blue-500 text-sm">
               <input
                 type="checkbox"
                 name="agreed"
@@ -151,27 +150,28 @@ export default function SignUpForm() {
                 className="mr-3 scale-125"
               />
               I agree with{' '}
-              <a href="#" className="text-blue-300 hover:text-white transition-colors duration-200 ml-1">
+              <a href="#" className="text-blue-500  hover:text-blue-500 transition-colors duration-200 ml-1">
                 Privacy Policy
               </a>
             </label>
 
             <button 
               type="submit" 
-              className="btn-primary w-full text-lg py-4"
+              className="w-full text-lg px-6 py-4 border-2 rounded-xl text-blue-100 bg-blue-600 hover:bg-blue-700 hover:text-blue-100 transition-all duration-300"
             >
               Get Started
             </button>
           </div>
-=======
-          <button
-            type="submit"
-            className="get-started-button"
-            disabled={signingUp}
-          >
-            {signingUp ? "Signing up..." : "Get Started"}
-          </button>
->>>>>>> 76415a76b24dd3adb86d456122c204d525784a4e
+          <p className="text-center text-blue-500 mt-6 text-sm">
+            Already have an account?{' '}
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              className="text-blue-300 hover:text-blue-100 underline transition-colors duration-200"
+            >
+              Log in
+            </button>
+          </p>
         </form>
       </div>
     </div>

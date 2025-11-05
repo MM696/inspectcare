@@ -27,7 +27,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-pink-500 relative overflow-x-hidden">
+    <div className="landing-font min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-pink-500 relative overflow-x-hidden">
       {/* Navbar */}
       <header className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl mx-4 mt-4 px-8 py-4 flex justify-between items-center relative z-10 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300">
         <h1 className="flex items-center text-3xl font-bold text-white gap-3">
@@ -62,10 +62,10 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="text-center py-24 px-8 relative">
+      <section className="text-center py-10 px-8 relative">
         <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto relative z-10">
           <div className="text-center lg:text-left max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 gradient-text text-shadow-lg animate-fade-in-up">
+            <h2 className="text-4xl md:text-5xl p-6 lg:text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-cyan-300 to-indigo-400 drop-shadow-lg animate-fade-in-up">
               Your Digital Health Ally
             </h2>
             <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
@@ -73,7 +73,7 @@ const LandingPage = () => {
               your well-being with InspectCare.
             </p>
             <button
-              className="btn-primary text-lg px-8 py-4 mb-8 animate-fade-in-up"
+              className="btn-primary text-lg px-8 py-4 rounded-xl mb-8 animate-fade-in-up border-2 border-white/70 text-white hover:border-white hover:bg-white/15"
               onClick={() => navigate("/signup")}
               style={{animationDelay: '0.4s'}}
             >
@@ -110,11 +110,7 @@ const LandingPage = () => {
           </div>
           <h3 className="text-2xl font-bold mb-4 text-white font-inter">About Us</h3>
           <p className="text-white/90 leading-relaxed">
-            InspectCare is an advanced symptom checker system for cardiovascular
-            diseases, designed to assist users with early detection and
-            proactive health management. Our target audience includes:
-            individuals concerned about heart health, patients at risk,
-            providers, and health-conscious users.
+            InspectCare blends smart symptom tracking with instant cardiovascular guidance, keeping you informed and confident about every heartbeat.
           </p>
         </div>
         <div className="glass-card p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up" style={{animationDelay: '0.2s'}}>
@@ -201,18 +197,18 @@ const LandingPage = () => {
               <form className="flex flex-col gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="text"
-                  className="glass-input"
+                  className="glass-input border rounded-xl p-2 border-white/40 bg-white/10 text-white placeholder:text-white/60 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/40"
                   placeholder="Your name"
                   required
                 />
                 <input
                   type="email"
-                  className="glass-input"
+                  className="glass-input border p-2 rounded-xl border-white/40 bg-white/10 text-white placeholder:text-white/60 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/40"
                   placeholder="Your email"
                   required
                 />
-                <button type="submit" className="btn-primary">
-                  Subscribe
+                <button type="submit" className="btn-primary rounded-xl p-2 border-2 border-white/40 hover:border-white hover:bg-white/15">
+                  <span className="text-white">Subscribe</span>
                 </button>
               </form>
             </div>
