@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import flexisafLogo from "../assets/flexisaf-logo.jpg";
+import flexisafLogo from "../assets/flexisaf-logo1.png";
+import AppAlertDialog from "../components/AppAlertDialog";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -12,8 +13,23 @@ export default function SignUpForm() {
     agreed: false,
   });
 
-  const [signingUp, setSigningUp] = useState(false); // ✅ new state
+  const [signingUp, setSigningUp] = useState(false);
+  const [alertState, setAlertState] = useState({
+    open: false,
+    title: "",
+    description: "",
+    tone: "info",
+    actionLabel: "Got it",
+    onClose: null,
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!alertState.open && alertState.onClose) {
+      alertState.onClose();
+      setAlertState((prev) => ({ ...prev, onClose: null, actionLabel: "Got it" }));
+    }
+  }, [alertState.open]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,25 +39,45 @@ export default function SignUpForm() {
     });
   };
 
+  const showAlert = ({ title, description, tone = "info", actionLabel = "Got it", onClose = null }) => {
+    setAlertState({ open: true, title, description, tone, actionLabel, onClose });
+  };
+
+  const handleAlertChange = (open) => {
+    setAlertState((prev) => ({ ...prev, open }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { fullname, email, username, password, confirmPassword, agreed } = formData;
 
     if (!fullname || !email || !username || !password || !confirmPassword || !agreed) {
-      return alert("Please fill in all fields and agree to the privacy policy.");
+      showAlert({
+        title: "Incomplete form",
+        description: "Please fill in all fields and agree to the privacy policy.",
+        tone: "error",
+      });
+      return;
     }
 
     if (password !== confirmPassword) {
-      return alert("Passwords do not match!");
+      showAlert({
+        title: "Password mismatch",
+        description: "Passwords do not match. Please double-check and try again.",
+        tone: "error",
+      });
+      return;
     }
 
-    const userData = { fullname, email, username, password };
+    const userData = { fullname, email, username, password, confirmPassword, agreed };
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com";
+    const endpoint = `${apiBaseUrl}/api/user/create`;
 
-    setSigningUp(true); // ✅ begin loading
+    setSigningUp(true);
 
     try {
-      const res = await fetch("https://health-inspector.onrender.com/api/user/create", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,42 +85,59 @@ export default function SignUpForm() {
         body: JSON.stringify(userData),
       });
 
+      const responseBody = await res.json().catch(() => null);
+
       if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || "Signup failed");
+        const errorMessage = responseBody?.message || "Signup failed";
+        throw new Error(errorMessage);
       }
 
-      alert("Account created successfully!");
-      navigate("/login");
+      showAlert({
+        title: "Account created",
+        description:
+          responseBody?.message || "Your InspectCare account has been created successfully. You can now sign in.",
+        tone: "success",
+        actionLabel: "Go to Login",
+        onClose: () => navigate("/login"),
+      });
     } catch (error) {
-      alert(`Signup failed: ${error.message}`);
-      console.error("Signup error:", error);
+      console.error("[Signup] Error:", error);
+      showAlert({
+        title: "Signup failed",
+        description: error.message || "Something went wrong. Please try again shortly.",
+        tone: "error",
+      });
     } finally {
-      setSigningUp(false); // ✅ end loading
+      setSigningUp(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-hero flex flex-col lg:flex-row relative overflow-hidden">
+      <AppAlertDialog
+        open={alertState.open}
+        onOpenChange={handleAlertChange}
+        title={alertState.title}
+        description={alertState.description}
+        tone={alertState.tone}
+        actionLabel={alertState.actionLabel}
+      />
       {/* Background Texture */}
       <div className="absolute inset-0 bg-grain-texture pointer-events-none"></div>
       
       {/* Left Side - Branding */}
-      <div className="flex-1 glass-card border-r border-white/20 flex flex-col items-center justify-center p-12 relative z-10 animate-fade-in-up">
+      <div className="flex-1 glass-card border-r border-white/20 flex flex-col p-6 items-center justify-center relative z-10 animate-fade-in-up">
         <img
           src={flexisafLogo}
           alt="InspectCare"
-          className="max-w-sm mb-8 rounded-2xl shadow-2xl"
+          className="w-48 sm:w-56 md:w-64 lg:w-full rounded-2xl shadow-2xl object-contain"
         />
-        <h3 className="text-4xl font-extrabold text-white font-inter text-shadow">
-          InspectCare
-        </h3>
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex-1 bg-white/5 backdrop-blur-lg flex items-center justify-center p-12 relative z-10">
+      <div className="flex-1 bg-white/5 backdrop-blur-lg flex items-center justify-center p-6 relative z-10">
         <form 
-          className="glass-card p-10 w-full max-w-md animate-fade-in-up text-blue-500" 
+          className="glass-card w-full max-w-md animate-fade-in-up text-blue-500" 
           style={{animationDelay: '0.4s'}}
           onSubmit={handleSubmit}
         >
@@ -158,8 +211,9 @@ export default function SignUpForm() {
             <button 
               type="submit" 
               className="w-full text-lg px-6 py-4 border-2 rounded-xl text-blue-100 bg-blue-600 hover:bg-blue-700 hover:text-blue-100 transition-all duration-300"
+              disabled={signingUp}
             >
-              Get Started
+              {signingUp ? "Signing up..." : "Get Started"}
             </button>
           </div>
           <p className="text-center text-blue-500 mt-6 text-sm">

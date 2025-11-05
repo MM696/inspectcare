@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Lightbulb, Target, HeartHandshake } from "lucide-react";
+import { Lightbulb, Target, HeartHandshake, Menu, X } from "lucide-react";
+import AppAlertDialog from "../components/AppAlertDialog";
 
 import logo from "../assets/logo-inspectCare.png";
 import heroImage from "../assets/flexisaf-logo.jpg";
@@ -20,45 +21,132 @@ const LandingPage = () => {
     }
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [alertState, setAlertState] = useState({
+    open: false,
+    title: "",
+    description: "",
+    tone: "info",
+    actionLabel: "Got it",
+    onClose: null,
+  });
+
+  const showAlert = ({ title, description, tone = "info", actionLabel = "Got it", onClose = null }) => {
+    setAlertState({ open: true, title, description, tone, actionLabel, onClose });
+  };
+
+  const handleAlertChange = (open) => {
+    setAlertState((prev) => {
+      if (!open && prev.onClose) {
+        prev.onClose();
+        return { ...prev, open, onClose: null, actionLabel: "Got it" };
+      }
+      return { ...prev, open };
+    });
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
-    alert("You have been logged out.");
-    navigate("/login");
+    showAlert({
+      title: "Logged out",
+      description: "You have been logged out successfully.",
+      tone: "success",
+      actionLabel: "Return to login",
+      onClose: () => navigate("/login"),
+    });
   };
+
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <div className="landing-font min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-pink-500 relative overflow-x-hidden">
+      <AppAlertDialog
+        open={alertState.open}
+        onOpenChange={handleAlertChange}
+        title={alertState.title}
+        description={alertState.description}
+        tone={alertState.tone}
+        actionLabel={alertState.actionLabel}
+      />
       {/* Navbar */}
-      <header className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl mx-4 mt-4 px-8 py-4 flex justify-between items-center relative z-10 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300">
-        <h1 className="flex items-center text-3xl font-bold text-white gap-3">
-          <img src={logo} alt="InspectCare logo" className="w-12 h-12 object-contain rounded-lg shadow-md" />
-          InspectCare
-        </h1>
-        <nav className="flex gap-3 items-center">
-          {localStorage.getItem("token") ? (
-            <button 
-              className="bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
-              onClick={handleLogout}
+      <header className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl mx-4 mt-4 px-5 sm:px-8 py-4 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center relative z-10 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300">
+        <div className="flex w-full items-center justify-between">
+          <h1 className="flex items-center justify-center sm:justify-start text-2xl sm:text-3xl font-bold text-white gap-3">
+            <img src={logo} alt="InspectCare logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-lg shadow-md" />
+            InspectCare
+          </h1>
+          <div className="sm:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-xl border border-white/30 text-white hover:bg-white/10 transition-colors duration-200"
+              aria-label="Toggle menu"
             >
-              Logout
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-          ) : (
-            <>
+          </div>
+          <nav className="hidden sm:flex flex-col sm:flex-row gap-3 items-center">
+            {localStorage.getItem("token") ? (
               <button
-                className="bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
-                onClick={() => navigate("/login")}
+                className="w-full sm:w-auto bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
+                onClick={handleLogout}
               >
-                Login
+                Logout
               </button>
+            ) : (
+              <>
+                <button
+                  className="w-full sm:w-auto bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
+                <button
+                  className="w-full sm:w-auto bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 text-white font-semibold rounded-xl border border-white/40 hover:from-cyan-500 hover:to-blue-600 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl transition-all duration-300"
+                  onClick={() => navigate("/signup")}
+                >
+                  Sign Up
+                </button>
+              </>
+            )}
+          </nav>
+        </div>
+        {mobileMenuOpen && (
+          <nav className="sm:hidden flex flex-col gap-3 pt-3">
+            {localStorage.getItem("token") ? (
               <button
-                className="bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 text-white font-semibold rounded-xl border border-white/40 hover:from-cyan-500 hover:to-blue-600 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl transition-all duration-300"
-                onClick={() => navigate("/signup")}
+                className="w-full bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
+                onClick={() => {
+                  closeMobileMenu();
+                  handleLogout();
+                }}
               >
-                Sign Up
+                Logout
               </button>
-            </>
-          )}
-        </nav>
+            ) : (
+              <>
+                <button
+                  className="w-full bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 text-white font-semibold rounded-xl hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
+                  onClick={() => {
+                    closeMobileMenu();
+                    navigate("/login");
+                  }}
+                >
+                  Login
+                </button>
+                <button
+                  className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 text-white font-semibold rounded-xl border border-white/40 hover:from-cyan-500 hover:to-blue-600 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl transition-all duration-300"
+                  onClick={() => {
+                    closeMobileMenu();
+                    navigate("/signup");
+                  }}
+                >
+                  Sign Up
+                </button>
+              </>
+            )}
+          </nav>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -102,8 +190,8 @@ const LandingPage = () => {
       </section>
 
       {/* Info Cards Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-16 max-w-7xl mx-auto relative" id="about-us">
-        <div className="glass-card p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative" id="about-us">
+        <div className="glass-card border border-white/25 lg:border-transparent p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
           <div className="w-12 h-12 mb-6 p-3 bg-white/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
             <Lightbulb className="w-full h-full text-blue-400" />
@@ -113,7 +201,7 @@ const LandingPage = () => {
             InspectCare blends smart symptom tracking with instant cardiovascular guidance, keeping you informed and confident about every heartbeat.
           </p>
         </div>
-        <div className="glass-card p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+        <div className="glass-card border border-white/25 lg:border-transparent p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
           <div className="w-12 h-12 mb-6 p-3 bg-white/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
             <Target className="w-full h-full text-emerald-400" />
@@ -124,7 +212,7 @@ const LandingPage = () => {
             real-time insights.
           </p>
         </div>
-        <div className="glass-card p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+        <div className="glass-card border border-white/25 lg:border-transparent p-10 hover:-translate-y-2 hover:bg-white/15 transition-all duration-300 relative overflow-hidden group animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
           <div className="w-12 h-12 mb-6 p-3 bg-white/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
             <HeartHandshake className="w-full h-full text-purple-400" />
