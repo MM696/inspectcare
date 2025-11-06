@@ -18,7 +18,6 @@ function MedicationReminder() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com/api";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +45,7 @@ function MedicationReminder() {
     e.preventDefault();
     if (!validateForm()) return;
 
-    fetch(`${apiBaseUrl}/med/create`, {
+    fetch("https://inspectcare.onrender.com/api/med/create", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -68,7 +67,7 @@ function MedicationReminder() {
     e.preventDefault();
     if (!validateForm()) return;
 
-    fetch(`${apiBaseUrl}/med/update/${id}`, {
+    fetch(`https://inspectcare.onrender.com/api/med/update/${id}`, {
       method: "PUT",
       body: JSON.stringify(formData),
       headers: {

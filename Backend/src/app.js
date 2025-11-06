@@ -10,7 +10,22 @@ import { notFoundHandler, errorHandler } from "./middleware/errorHandler.js";
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: '*', credentials: true }));
+const allowedOrigins = config.corsOrigins.map((origin) => origin.replace(/\/$/, ""));
+
+const normalizeOrigin = (origin) => (origin ? origin.replace(/\/$/, "") : origin);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const normalized = normalizeOrigin(origin);
+      if (!origin || allowedOrigins.includes(normalized)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
