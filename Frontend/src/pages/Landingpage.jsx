@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Lightbulb, Target, HeartHandshake, Menu, X } from "lucide-react";
 import AppAlertDialog from "../components/AppAlertDialog";
 
-import logo from "../assets/logo-inspectcare.png";
+import logo from "../assets/logo-inspectcare1.png";
 import heroImage from "../assets/flexisaf-logo.jpg";
 import twitterIcon from "../assets/twitter.png";
 import facebookIcon from "../assets/facebook.png";
@@ -73,7 +73,7 @@ const LandingPage = () => {
       <header className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl mx-4 mt-4 px-5 sm:px-8 py-4 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center relative z-10 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300">
         <div className="flex w-full items-center justify-between">
           <h1 className="flex items-center justify-center sm:justify-start text-2xl sm:text-3xl font-bold text-white gap-3">
-            <img src={logo} alt="InspectCare logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-lg shadow-md" />
+            <img src={logo} alt="InspectCare logo" className="w-10 h-10 sm:w-12 sm:h-12 bg-white object-contain rounded-lg shadow-md" />
             InspectCare
           </h1>
           <div className="sm:hidden">

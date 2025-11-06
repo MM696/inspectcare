@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import flexisafLogo from "../assets/flexisaf-logo1.png";
-import doctorImage from "../assets/mission-img.jpg";
+import doctorImage from "../assets/mission-img1.png";
 
 const BookAppointmentpage = ({ setAppointmentDate, setAppointmentTime }) => {
   const navigate = useNavigate();
