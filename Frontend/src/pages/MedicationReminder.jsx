@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import flexisafLogo from "../assets/flexisaf-logo1.png";
+import AppAlertDialog from "../components/AppAlertDialog";
 
 function MedicationReminder() {
   const [formData, setFormData] = useState({
@@ -16,8 +17,39 @@ function MedicationReminder() {
     instructions: "",
   });
 
+  const [alertState, setAlertState] = useState({
+    open: false,
+    title: "",
+    description: "",
+    tone: "info",
+    actionLabel: "Got it",
+    onClose: null,
+  });
+
+  const [isSaving, setIsSaving] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com/api";
+
+  useEffect(() => {
+    if (!alertState.open && alertState.onClose) {
+      alertState.onClose();
+      setAlertState((prev) => ({ ...prev, onClose: null, actionLabel: "Got it" }));
+    }
+  }, [alertState.open]);
+
+  const showAlert = ({ title, description, tone = "info", actionLabel = "Got it", onClose = null }) => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    setAlertState({ open: true, title, description, tone, actionLabel, onClose });
+  };
+
+  const handleAlertChange = (open) => {
+    setAlertState((prev) => ({ ...prev, open }));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,12 +61,20 @@ function MedicationReminder() {
       formData;
 
     if (!medicationName || !startDate || !endDate || !prescribingDoctor || !dosage) {
-      alert("Please fill in all required fields.");
+      showAlert({
+        title: "Incomplete form",
+        description: "Medication name, doctor, dosage, start date, and end date are required.",
+        tone: "error",
+      });
       return false;
     }
 
     if (endDate < startDate) {
-      alert("End date cannot be before start date.");
+      showAlert({
+        title: "Invalid dates",
+        description: "End date cannot be before start date.",
+        tone: "error",
+      });
       return false;
     }
 
@@ -45,7 +85,9 @@ function MedicationReminder() {
     e.preventDefault();
     if (!validateForm()) return;
 
-    fetch("https://inspectcare.onrender.com/api/med/create", {
+    setIsSaving(true);
+
+    fetch(`${apiBaseUrl}/med/create`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -54,20 +96,40 @@ function MedicationReminder() {
       },
       credentials: "include",
     })
-      .then((res) => res.json())
-      .then((data) => {
-        alert("Medication Saved!");
-        console.log(data);
-        navigate("/dashboard");
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          const message = data?.message || "Unable to save medication reminder.";
+          throw new Error(message);
+        }
+        showAlert({
+          title: "Medication saved",
+          description: data?.message || "We have stored your reminder successfully.",
+          tone: "success",
+          actionLabel: "Back to dashboard",
+          onClose: () => navigate("/dashboard"),
+        });
       })
-      .catch((error) => console.error("Save error:", error));
+      .catch((error) => {
+        console.error("Save error:", error);
+        showAlert({
+          title: "Save failed",
+          description: error.message || "Something went wrong while saving your reminder.",
+          tone: "error",
+        });
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    fetch(`https://inspectcare.onrender.com/api/med/update/${id}`, {
+    setIsUpdating(true);
+
+    fetch(`${apiBaseUrl}/med/update/${formData.medicationName}`, {
       method: "PUT",
       body: JSON.stringify(formData),
       headers: {
@@ -76,16 +138,41 @@ function MedicationReminder() {
       },
       credentials: "include",
     })
-      .then((res) => res.json())
-      .then((data) => {
-        alert("Medication Updated!");
-        console.log(data);
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          const message = data?.message || "Unable to update medication reminder.";
+          throw new Error(message);
+        }
+        showAlert({
+          title: "Medication updated",
+          description: data?.message || "Your reminder has been updated successfully.",
+          tone: "success",
+        });
       })
-      .catch((error) => console.error("Update error:", error));
+      .catch((error) => {
+        console.error("Update error:", error);
+        showAlert({
+          title: "Update failed",
+          description: error.message || "Something went wrong while updating your reminder.",
+          tone: "error",
+        });
+      })
+      .finally(() => {
+        setIsUpdating(false);
+      });
   };
 
   return (
     <div className="min-h-screen bg-gradient-hero flex flex-col lg:flex-row relative overflow-hidden">
+      <AppAlertDialog
+        open={alertState.open}
+        onOpenChange={handleAlertChange}
+        title={alertState.title}
+        description={alertState.description}
+        tone={alertState.tone}
+        actionLabel={alertState.actionLabel}
+      />
       <div className="absolute inset-0 bg-grain-texture pointer-events-none"></div>
 
       {/* Left panel */}
@@ -163,8 +250,8 @@ function MedicationReminder() {
                 placeholder="Preferred time"
                 className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 placeholder:text-blue-200/70 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <label className="text-sm uppercase tracking-wide text-blue-400">   
-                Start Date              
+              <label className="text-sm uppercase tracking-wide text-blue-400">
+                Start Date
                 <input
                   type="date"
                   name="startDate"
@@ -174,7 +261,7 @@ function MedicationReminder() {
                   className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </label>
-              
+
               <input
                 name="frequency"
                 value={formData.frequency}
@@ -184,18 +271,18 @@ function MedicationReminder() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <label className="text-sm uppercase tracking-wide text-blue-400">   
-                End Date              
-              <input
-                type="date"
-                name="endDate"
-                value={formData.endDate}
-                onChange={handleChange}
-                required
-                className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />               
-               </label>
+            <div className="grid grid-cols-1 md-grid-cols-3 gap-4">
+              <label className="text-sm uppercase tracking-wide text-blue-400">
+                End Date
+                <input
+                  type="date"
+                  name="endDate"
+                  value={formData.endDate}
+                  onChange={handleChange}
+                  required
+                  className="glass-input w-full border border-blue-400/50 rounded-xl px-4 py-3 bg-blue-500/10 text-blue-500 focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </label>
               <input
                 name="medicationLocation"
                 value={formData.medicationLocation}
@@ -237,16 +324,18 @@ function MedicationReminder() {
             <div className="flex flex-wrap gap-4 justify-end">
               <button
                 type="submit"
-                className="px-6 py-3 border-2 border-blue-400/60 rounded-xl text-blue-100 bg-blue-600 hover:bg-blue-700 hover:text-blue-50 transition-all duration-300"
+                className="px-6 py-3 border-2 border-blue-400/60 rounded-xl text-blue-100 bg-blue-600 hover:bg-blue-700 hover:text-blue-50 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={isSaving}
               >
-                Save
+                {isSaving ? "Saving..." : "Save"}
               </button>
               <button
                 type="button"
                 onClick={handleUpdate}
-                className="px-6 py-3 border-2 border-blue-400/60 rounded-xl text-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition-all duration-300"
+                className="px-6 py-3 border-2 border-blue-400/60 rounded-xl text-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={isUpdating}
               >
-                Update
+                {isUpdating ? "Updating..." : "Update"}
               </button>
               <button
                 type="reset"

@@ -40,6 +40,9 @@ export default function SignUpForm() {
   };
 
   const showAlert = ({ title, description, tone = "info", actionLabel = "Got it", onClose = null }) => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setAlertState({ open: true, title, description, tone, actionLabel, onClose });
   };
 
