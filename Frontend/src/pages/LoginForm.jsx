@@ -54,7 +54,7 @@ function LoginForm() {
     setIsLoggingIn(true);
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com";
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare-backend.onrender.com";
       const res = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: "POST",
         body: JSON.stringify(userData),

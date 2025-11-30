@@ -31,7 +31,7 @@ function MedicationReminder() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com/api";
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare-backend.onrender.com/api";
 
   useEffect(() => {
     if (!alertState.open && alertState.onClose) {

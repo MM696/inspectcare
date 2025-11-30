@@ -74,7 +74,7 @@ export default function SignUpForm() {
     }
 
     const userData = { fullname, email, username, password, confirmPassword, agreed };
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare.onrender.com";
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "https://inspectcare-backend.onrender.com";
     const endpoint = `${apiBaseUrl}/api/user/create`;
 
     setSigningUp(true);
