@@ -11,7 +11,7 @@ const defaultCorsOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
-  "https://inspectcare-5eu9.onrender.com",
+  "https://inspectcare-p1i7.onrender.com",
 ];
 
 const corsOrigins = process.env.CORS_ORIGINS
